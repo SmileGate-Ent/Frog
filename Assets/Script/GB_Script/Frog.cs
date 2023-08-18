@@ -5,7 +5,7 @@ public class Frog : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 10;
     
-    [SerializeField] GameObject tongueTargetPrefab; // 생성할 게임 오브젝트 프리팹입니다.
+    //[SerializeField] GameObject tongueTargetPrefab; // 생성할 게임 오브젝트 프리팹입니다.
 
     [SerializeField] Camera cam;
 
@@ -48,7 +48,7 @@ public class Frog : MonoBehaviour
             }
 
             // 씬에 프리팹 게임 오브젝트를 클릭한 위치에 생성합니다.
-            Instantiate(tongueTargetPrefab, worldPoint, Quaternion.identity);
+            //Instantiate(tongueTargetPrefab, worldPoint, Quaternion.identity);
         }
         
         var tongueLocalScale = tongue.transform.localScale;
