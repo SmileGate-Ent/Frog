@@ -128,7 +128,7 @@ public class Frog : MonoBehaviour
     IEnumerator HpCalculation()
     {
         Hp -= hpCurve.Evaluate(hpTime);
-        if (hp <= 0)
+        if (hp <= 0 && isDie == false)
         {
             Die();
         }
@@ -154,6 +154,8 @@ public class Frog : MonoBehaviour
             //frogSprite.sprite = frogJumpSprite;
             spriteState = SpriteState.Jump;
         }
+        
+        //Debug.Log($"isDie = {isDie}");
 
         if (isJump && !isDie)
         {
@@ -173,6 +175,7 @@ public class Frog : MonoBehaviour
             {
                 if (!Physics2D.OverlapCircle(transform.position, 2, layers))
                 {
+                    Debug.Log("Instantiate dieWater");
                     var a = Instantiate(dieWater, transform.position, quaternion.identity);
                     Destroy(a, 1f);
                     Die();
@@ -319,9 +322,14 @@ public class Frog : MonoBehaviour
 
     private void Die()
     {
-        gameOverPopup.SetActive(true);
+        if (gameOverPopup != null)
+        {
+            gameOverPopup.SetActive(true);
+        }
+
         frogpivot[0].SetActive(false);
         frogpivot[1].SetActive(false);
+        Debug.Log("isDie to true");
         isDie = true;
         var m = hpTime / 60;
         GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
