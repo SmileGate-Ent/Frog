@@ -55,9 +55,9 @@ public class Enemy : MonoBehaviour
         {
             //if (Frog.Instance.IsAttachedToTongue(this))
             {
-                Frog.Instance.Score++;
-                Frog.Instance.Hp += 5;
-                Frog.Instance.PlayScoreClip();
+                Frog.Instance.Hp -= 30;
+                //Frog.Instance.PlayScoreClip();
+                Frog.Instance.StartDebuff();
                 Destroy(gameObject);
             }
         }

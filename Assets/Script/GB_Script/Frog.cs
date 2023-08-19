@@ -227,7 +227,7 @@ public class Frog : MonoBehaviour
 
         // 왼쪽 마우스 버튼이 클릭되었을 때
         // 점프 중일 때는 공격 시작 못한다. 
-        if (Input.GetMouseButtonDown(0) && JumpNormalizedDuration <= 0)
+        if (Input.GetMouseButtonDown(0) && JumpNormalizedDuration <= 0 && debuffSlider.value <= 0)
         {
             tongueTargetPos = worldPoint;
             if (tongueTargetPos != null)
@@ -279,6 +279,16 @@ public class Frog : MonoBehaviour
         }
 
         UpdateFrogSprite();
+        
+        debuffSlider.value = Mathf.Max(0, debuffSlider.value - Time.deltaTime);
+        debuffSlider.gameObject.SetActive(debuffSlider.value > 0);
+    }
+
+    public void StartDebuff()
+    {
+        debuffSlider.maxValue = 5;
+        debuffSlider.value = debuffSlider.maxValue;
+        debuffSlider.gameObject.SetActive(true);
     }
 
     void UpdateFrogSprite()
