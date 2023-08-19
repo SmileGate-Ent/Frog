@@ -8,7 +8,7 @@ public class LogoScene : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene("Scenes/FrogTest");
     }
 }
