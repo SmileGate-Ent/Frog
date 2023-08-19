@@ -294,7 +294,7 @@ public class Frog : MonoBehaviour
         }
         
         hpSlider.fillAmount = Hp/100;
-        hpSlider.color = Color.HSVToRGB(0.36f*hpSlider.fillAmount,0.85f,0.85f);
+        hpSlider.color = Color.HSVToRGB(0.28f*hpSlider.fillAmount,0.85f,0.85f);
 
         debuffSlider.value = Mathf.Max(0, debuffSlider.value - Time.deltaTime);
         debuffSlider.gameObject.SetActive(debuffSlider.value > 0);
