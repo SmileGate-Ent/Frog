@@ -190,7 +190,7 @@ MonoBehaviour:
   movePosition: {x: 0, y: 0}
   moveLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   spriteRenderer: {fileID: 7770160093060713331}
   tongueLayer:
     serializedVersion: 2
@@ -198,6 +198,10 @@ MonoBehaviour:
   frogBodyLayer:
     serializedVersion: 2
     m_Bits: 64
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  damage: 30
 --- !u!195 &4459950313391013026
 NavMeshAgent:
   m_ObjectHideFlags: 0

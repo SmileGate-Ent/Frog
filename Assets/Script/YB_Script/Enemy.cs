@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] LayerMask tongueLayer;
     [SerializeField] LayerMask frogBodyLayer;
+    [SerializeField] LayerMask groundLayer;
 
     [SerializeField] float damage = 30;
 
@@ -48,25 +49,28 @@ public class Enemy : MonoBehaviour
     {
         if ((tongueLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            if (Frog.Instance.CanCatch)
+            if (Frog.Instance.CanCatch && Frog.Instance.IsTongueExtended)
             {
                 Frog.Instance.AttachItemToTongue(this);
             }
         }
         else if ((frogBodyLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            
             Frog.Instance.PlayDamageClip();
-            Frog.Instance.StartDebuff();
-
+            
             if (Frog.Instance.IsAttachedToTongue(this))
             {
+                Frog.Instance.StartDebuff();
                 Destroy(gameObject);
             }
             else
             {
                 Frog.Instance.Hp -= damage;
             }
+        }
+        else if ((groundLayer.value & (1 << col.gameObject.layer)) != 0)
+        {
+            // 아무것도 하지 않는다.
         }
         else
         {
