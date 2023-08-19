@@ -30,14 +30,14 @@ public class Item : MonoBehaviour
     {
         if ((tongueLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            //if (Frog.Instance.CanCatch)
+            if (Frog.Instance.CanCatch)
             {
                 Frog.Instance.AttachItemToTongue(this);
             }
         }
         else if ((frogBodyLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            //if (Frog.Instance.IsAttachedToTongue(this))
+            if (Frog.Instance.IsAttachedToTongue(this) || Frog.Instance.CanCatch)
             {
                 Frog.Instance.Score += deltaScore;
                 Frog.Instance.Hp += deltaHp;

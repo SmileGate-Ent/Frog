@@ -93,7 +93,9 @@ public class Frog : MonoBehaviour
 
     float JumpNormalizedDuration => jumpCurrentDuration / jumpTotalDuration;
 
-    public bool CanCatch => tongueTargetLength > 0;
+    public bool CanCatch => /*tongueTargetLength > 0 &&*/ debuffSlider.value <= 0;
+
+    public bool IsTongueExtended => tongueTargetLength > 0;
 
     public float Hp
     {

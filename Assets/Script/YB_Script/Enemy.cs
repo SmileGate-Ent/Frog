@@ -49,19 +49,18 @@ public class Enemy : MonoBehaviour
     {
         if ((tongueLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            if (Frog.Instance.CanCatch)
+            if (Frog.Instance.CanCatch && Frog.Instance.IsTongueExtended)
             {
                 Frog.Instance.AttachItemToTongue(this);
             }
         }
         else if ((frogBodyLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            
             Frog.Instance.PlayDamageClip();
-            Frog.Instance.StartDebuff();
-
+            
             if (Frog.Instance.IsAttachedToTongue(this))
             {
+                Frog.Instance.StartDebuff();
                 Destroy(gameObject);
             }
             else
