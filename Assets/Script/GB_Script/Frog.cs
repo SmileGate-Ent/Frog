@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Frog : MonoBehaviour
 {
@@ -92,6 +93,16 @@ public class Frog : MonoBehaviour
                 isJump = false;
                 jumpCurrentDuration = 0;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            var popup = FrogCanvas.Instance.InstantiateConfirmPopup();
+            popup.Text = "종료하시겠습니까?";
+            popup.Btn1Text = "예";
+            popup.Btn2Text = "아니요";
+            popup.OnBtn1 = () => SceneManager.LoadScene("TitleScene");
+            popup.OnBtn2 = () => Destroy(popup.gameObject);
         }
 
         // 점프에 의한 개구리 스프라이트 위치 조절

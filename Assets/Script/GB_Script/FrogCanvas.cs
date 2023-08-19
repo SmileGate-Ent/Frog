@@ -7,6 +7,7 @@ public class FrogCanvas : MonoBehaviour
     
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] ConfirmPopup confirmPopupPrefab;
 
     public string HpText
     {
@@ -21,5 +22,10 @@ public class FrogCanvas : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    public ConfirmPopup InstantiateConfirmPopup()
+    {
+        return Instantiate(confirmPopupPrefab, transform);
     }
 }

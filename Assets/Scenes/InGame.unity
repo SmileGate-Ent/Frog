@@ -70852,6 +70852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpText: {fileID: 1435597438}
   scoreText: {fileID: 1592447968}
+  confirmPopupPrefab: {fileID: 3256025142484509400, guid: 9854317149a014945b5d947ae59ee03c, type: 3}
 --- !u!1 &1308331074
 GameObject:
   m_ObjectHideFlags: 0
