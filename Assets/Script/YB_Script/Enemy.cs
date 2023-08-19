@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] LayerMask tongueLayer;
     [SerializeField] LayerMask frogBodyLayer;
+    [SerializeField] LayerMask groundLayer;
 
     [SerializeField] float damage = 30;
 
@@ -67,6 +68,10 @@ public class Enemy : MonoBehaviour
             {
                 Frog.Instance.Hp -= damage;
             }
+        }
+        else if ((groundLayer.value & (1 << col.gameObject.layer)) != 0)
+        {
+            // 아무것도 하지 않는다.
         }
         else
         {

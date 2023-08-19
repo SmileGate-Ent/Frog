@@ -1027,83 +1027,13 @@ MonoBehaviour:
   damageClip: {fileID: 8300000, guid: b24db804f292388449057896992420c7, type: 3}
   layers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   dieWater: {fileID: 145555119499880662, guid: 502a1e11dfbd4b341bf22cbd8312472f, type: 3}
   frogpivot:
   - {fileID: 5878648604615502113}
   - {fileID: 4219105172810993858}
   frogSprite: {fileID: 1245352396748298203}
   frogMouth: {fileID: 2693262760169176470}
-  hpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.033333335
-      outSlope: 0.033333335
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 60
-      value: 2
-      inSlope: 0.033333335
-      outSlope: 0.033333335
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 90
-      value: 3
-      inSlope: 0.016666668
-      outSlope: 0.016666668
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 120
-      value: 3
-      inSlope: 0.008333334
-      outSlope: 0.008333334
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 180
-      value: 4
-      inSlope: 0.008333334
-      outSlope: 0.008333334
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 240
-      value: 4
-      inSlope: 0.008333334
-      outSlope: 0.008333334
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 300
-      value: 5
-      inSlope: 0.016666668
-      outSlope: 0.016666668
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  hpTime: 0
   hpSlider: {fileID: 0}
   debuffSlider: {fileID: 0}
   preset: {fileID: 11400000, guid: 2837feba1434b204095232879f6adfe8, type: 2}
