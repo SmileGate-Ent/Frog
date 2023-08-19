@@ -269,7 +269,7 @@ public class Frog : MonoBehaviour
             tonguePivot.transform.LookAt(tongueTargetPos.Value, Vector3.forward);
 
             // 목표하는 혀 길이보다 0.1f보다 조금 짧은 순간이 오면 다시 혀를 말아 들인다.
-            if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.05f
+            if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.15f
                 || tongueLocalScale.x > tongueTargetFirstLength / tongueScale
                )
             {
@@ -287,7 +287,7 @@ public class Frog : MonoBehaviour
             foreach (var c in tongueTip.Cast<Transform>())
             {
                 // 혹시 먹은 게 적이면 디버프 시작
-                if (c != null && c.GetComponent<Enemy>() is var e)
+                if (c != null && c.GetComponent<Enemy>() is var e && e != null)
                 {
                     OnEatEnemy(e.DeltaScore);
                 }
