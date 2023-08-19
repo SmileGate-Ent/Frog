@@ -9,6 +9,6 @@ public class LogoScene : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("Scenes/FrogTest");
+        SceneManager.LoadScene("TitleScene");
     }
 }

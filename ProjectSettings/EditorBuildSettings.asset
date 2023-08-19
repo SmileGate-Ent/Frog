@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/LogoScene.unity
     guid: 49a501e801d4c374296daa857c03c41c
   - enabled: 1
-    path: Assets/Scenes/FrogTest.unity
-    guid: 08fc6fc948b9a4d489c31bf71dcc79d2
-  - enabled: 1
-    path: Assets/Scenes/YB_Scene.unity
+    path: Assets/Scenes/TitleScene.unity
     guid: 323289d11743916479952eff6adb2cd7
+  - enabled: 1
+    path: Assets/Scenes/InGame.unity
+    guid: 08fc6fc948b9a4d489c31bf71dcc79d2
   - enabled: 1
     path: Assets/Scenes/YB_Scene_Main.unity
     guid: 4b1fb15f8cf69d140a4afaab2d6ce520

@@ -9,7 +9,7 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject setting;
     public void StartButton()
     {
-        SceneManager.LoadScene("YB_Scene_Main");
+        SceneManager.LoadScene("InGame");
     }
     public void SettingButton()
     {
