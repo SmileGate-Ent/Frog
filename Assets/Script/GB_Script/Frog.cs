@@ -56,7 +56,7 @@ public class Frog : MonoBehaviour
 
     [SerializeField] private AnimationCurve hpCurve;
     [SerializeField] private int hpTime;
-    [SerializeField] private Slider hpSlider;
+    [SerializeField] private Image hpSlider;
     
     
     [SerializeField] private Slider debuffSlider;
@@ -290,7 +290,8 @@ public class Frog : MonoBehaviour
             }
         }
         
-        hpSlider.value = Hp;
+        hpSlider.fillAmount = Hp/100;
+        hpSlider.color = Color.HSVToRGB(0.36f*hpSlider.fillAmount,0.85f,0.85f);
 
         debuffSlider.value = Mathf.Max(0, debuffSlider.value - Time.deltaTime);
         debuffSlider.gameObject.SetActive(debuffSlider.value > 0);
