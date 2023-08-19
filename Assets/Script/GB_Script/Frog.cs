@@ -1,4 +1,6 @@
 using System;
+using Unity.Mathematics;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,7 +30,11 @@ public class Frog : MonoBehaviour
     [SerializeField] AnimationCurve jumpHeightCurve;
     [SerializeField] float jumpTotalDuration = 0.5f;
     [SerializeField] float jumpHeight = 2.0f;
+
     [SerializeField] Transform frogSpritePivot;
+
+    [SerializeField] Transform frogSprite;  
+
     [SerializeField] float jumpMoveRatioInCurve = 0.9f;
     [SerializeField] Transform shadowPivot;
 
@@ -36,6 +42,11 @@ public class Frog : MonoBehaviour
     [SerializeField] AudioClip jumpClip;
     [SerializeField] AudioClip tongueClip;
     [SerializeField] AudioClip scoreClip;
+    
+    
+    [SerializeField] LayerMask layers;
+    [SerializeField] GameObject dieWater;
+    [SerializeField] GameObject[] frogpivot;
 
     [SerializeField] SpriteRenderer frogSprite;
 
@@ -101,6 +112,14 @@ public class Frog : MonoBehaviour
             jumpCurrentDuration += Time.deltaTime;
             if (jumpCurrentDuration >= jumpTotalDuration)
             {
+                if (!Physics2D.OverlapCircle(transform.position, 2,layers))
+                {
+                    var a = Instantiate(dieWater, transform.position,quaternion.identity);
+                    Destroy(a, 1f);
+                    Invoke("ReSpawn",3f);
+                    frogpivot[0].SetActive(false);
+                    frogpivot[1].SetActive(false);
+                }
                 isJump = false;
                 jumpCurrentDuration = 0;
             }
@@ -181,6 +200,12 @@ public class Frog : MonoBehaviour
         }
     }
 
+    private void ReSpawn()
+    {
+        frogpivot[0].SetActive(true);
+        frogpivot[1].SetActive(true);
+        transform.position = Vector3.zero;
+    }
     public void PlayScoreClip()
     {
         sfxAudioSource.PlayOneShot(scoreClip);
