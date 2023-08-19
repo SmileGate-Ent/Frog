@@ -28,6 +28,15 @@ public class ButtonManager : MonoBehaviour
 #endif
     }
 
+    public void GotoTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
+    public void ReStart()
+    {
+        SceneManager.LoadScene("InGame");
+    }
     public void CloseSetting()
     {
         setting.SetActive(false);
