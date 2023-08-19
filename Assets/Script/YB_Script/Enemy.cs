@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [SerializeField] float damage = 30;
+    [SerializeField] int deltaScore = 20;
+
+    public int DeltaScore => deltaScore;
 
     private NavMeshAgent _agent;
     void Start()
@@ -60,7 +63,7 @@ public class Enemy : MonoBehaviour
             
             if (Frog.Instance.IsAttachedToTongue(this))
             {
-                Frog.Instance.StartDebuff();
+                Frog.Instance.OnEatEnemy(DeltaScore);
                 Destroy(gameObject);
             }
             else

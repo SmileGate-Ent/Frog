@@ -286,9 +286,9 @@ public class Frog : MonoBehaviour
             foreach (var c in tongueTip.Cast<Transform>())
             {
                 // 혹시 먹은 게 적이면 디버프 시작
-                if (c.GetComponent<Enemy>() != null)
+                if (c.GetComponent<Enemy>() is var e)
                 {
-                    StartDebuff();
+                    OnEatEnemy(e.DeltaScore);
                 }
                 Destroy(c.gameObject);
             }
@@ -401,5 +401,11 @@ public class Frog : MonoBehaviour
     public void PlayDamageClip()
     {
         sfxAudioSource.PlayOneShot(damageClip);
+    }
+
+    public void OnEatEnemy(int deltaScore)
+    {
+        Score += deltaScore;
+        StartDebuff();
     }
 }
