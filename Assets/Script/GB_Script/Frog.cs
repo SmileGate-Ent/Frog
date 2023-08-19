@@ -311,6 +311,11 @@ public class Frog : MonoBehaviour
     {
         item.transform.SetParent(tongueTip);
     }
+    
+    public void AttachItemToTongue(Enemy item)
+    {
+        item.transform.SetParent(tongueTip);
+    }
 
     public bool IsAttachedToTongue(Item item)
     {
