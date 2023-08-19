@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : Singleton<AudioManager> 
+public class AudioManager : Singleton<AudioManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] AudioClip btnClick;
+    [SerializeField] AudioSource sfxAudioSource;
 
-    // Update is called once per frame
-    void Update()
+    public void PlayBtnClick()
     {
-        
+        sfxAudioSource.PlayOneShot(btnClick);
     }
 }

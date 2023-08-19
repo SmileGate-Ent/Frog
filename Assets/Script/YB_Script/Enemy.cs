@@ -53,13 +53,17 @@ public class Enemy : MonoBehaviour
         }
         else if ((frogBodyLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            Frog.Instance.Hp -= 30;
-            //Frog.Instance.PlayScoreClip();
+            
+            Frog.Instance.PlayDamageClip();
             Frog.Instance.StartDebuff();
 
             if (Frog.Instance.IsAttachedToTongue(this))
             {
                 Destroy(gameObject);
+            }
+            else
+            {
+                Frog.Instance.Hp -= 30;
             }
         }
         else

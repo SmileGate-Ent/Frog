@@ -45,7 +45,8 @@ public class Frog : MonoBehaviour
     [SerializeField] AudioClip jumpClip;
     [SerializeField] AudioClip tongueClip;
     [SerializeField] AudioClip scoreClip;
-
+    [SerializeField] AudioClip damageClip;
+    
     [SerializeField] LayerMask layers;
     [SerializeField] GameObject dieWater;
     [SerializeField] GameObject[] frogpivot;
@@ -359,5 +360,10 @@ public class Frog : MonoBehaviour
     public bool IsAttachedToTongue(Enemy enemy)
     {
         return enemy.transform.parent == tongueTip;
+    }
+
+    public void PlayDamageClip()
+    {
+        sfxAudioSource.PlayOneShot(damageClip);
     }
 }

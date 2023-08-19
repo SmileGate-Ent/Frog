@@ -9,18 +9,22 @@ public class ButtonManager : MonoBehaviour
     [SerializeField] private GameObject setting;
     public void StartButton()
     {
+        AudioManager.Instance.PlayBtnClick();
         SceneManager.LoadScene("InGame");
     }
     public void SettingButton()
     {
+        AudioManager.Instance.PlayBtnClick();
         setting.SetActive(true);
     }
     public void CreditButton()
     {
+        AudioManager.Instance.PlayBtnClick();
         credit.SetActive(true);
     }
     public void ExitButton()
     {
+        AudioManager.Instance.PlayBtnClick();
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

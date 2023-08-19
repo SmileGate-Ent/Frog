@@ -39,7 +39,15 @@ public class Item : MonoBehaviour
             {
                 Frog.Instance.Score += deltaScore;
                 Frog.Instance.Hp += deltaHp;
-                Frog.Instance.PlayScoreClip();
+                if (deltaHp < 0)
+                {
+                    Frog.Instance.PlayDamageClip();
+                }
+                else
+                {
+                    Frog.Instance.PlayScoreClip();
+                }
+
                 Destroy(gameObject);
 
                 // 외형 변경!!!
