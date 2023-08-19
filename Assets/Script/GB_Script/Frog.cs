@@ -197,7 +197,7 @@ public class Frog : MonoBehaviour
 
         if (tongueTargetPos != null)
         {
-            tongueTargetLength = Vector3.Distance(tonguePivot.position, tongueTargetPos.Value) * 2;
+            tongueTargetLength = Vector3.Distance(tonguePivot.position, tongueTargetPos.Value) * 3;
 
             tonguePivot.transform.LookAt(tongueTargetPos.Value, Vector3.forward);
 
