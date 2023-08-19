@@ -333,7 +333,7 @@ public class Frog : MonoBehaviour
         isDie = true;
         var m = hpTime / 60;
         GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
-        GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{m}:{hpTime%60}";
+        GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{string.Format("{0:D2}",m)}:{string.Format("{0:D2}",hpTime%60)}";
         Destroy(GetComponent<Frog>());
     }
 
