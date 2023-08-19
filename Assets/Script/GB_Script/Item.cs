@@ -26,6 +26,7 @@ public class Item : MonoBehaviour
             //if (Frog.Instance.IsAttachedToTongue(this))
             {
                 Frog.Instance.Score++;
+                Frog.Instance.Hp += 5;
                 Frog.Instance.PlayScoreClip();
                 Destroy(gameObject);
             }

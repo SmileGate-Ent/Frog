@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Frog : MonoBehaviour
 {
@@ -26,7 +28,7 @@ public class Frog : MonoBehaviour
     float tongueTargetFirstLength;
     [SerializeField] Transform tongueTip;
 
-    [SerializeField] int hp;
+    [SerializeField] float hp;
     [SerializeField] int score;
 
     [SerializeField] AnimationCurve jumpHeightCurve;
@@ -55,6 +57,10 @@ public class Frog : MonoBehaviour
     [SerializeField] Sprite frogAttackSprite;
     [SerializeField] GameObject frogMouth;
 
+    [SerializeField] private AnimationCurve hpCurve;
+    [SerializeField] private int hpTime;
+    [SerializeField] private Slider hpSlider;
+
     float jumpCurrentDuration;
     bool isJump;
     bool isDie;
@@ -66,7 +72,7 @@ public class Frog : MonoBehaviour
 
     public int Hp
     {
-        get => hp;
+        get => (int)hp;
         set
         {
             hp = value;
@@ -87,7 +93,7 @@ public class Frog : MonoBehaviour
     void Awake()
     {
         Instance = this;
-
+        StartCoroutine(HpCalculation());
         tonguePivot.localScale = Vector3.one * tongueScale;
     }
 
@@ -99,6 +105,15 @@ public class Frog : MonoBehaviour
         }
     }
 
+    IEnumerator HpCalculation()
+    {
+        hp -= hpCurve.Evaluate(hpTime);
+        hpSlider.value = hp;
+        yield return new WaitForSeconds(1f);
+        hpTime++;
+        StartCoroutine(HpCalculation());
+    }
+    
     void Update()
     {
         var dx = Input.GetAxisRaw("Horizontal");
