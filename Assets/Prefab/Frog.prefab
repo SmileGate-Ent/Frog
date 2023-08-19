@@ -948,7 +948,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpTotalDuration: 0.5
-  jumpHeight: 2
+  jumpHeight: 3
   frogSpritePivot: {fileID: 532117007109192206}
   jumpMoveRatioInCurve: 0.9
   shadowPivot: {fileID: 4142103416329620408}

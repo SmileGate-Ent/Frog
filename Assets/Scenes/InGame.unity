@@ -1453,6 +1453,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4505354970507839213, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
+      propertyPath: preset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2837feba1434b204095232879f6adfe8, type: 2}
+    - target: {fileID: 4505354970507839213, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
       propertyPath: hpSlider
       value: 
       objectReference: {fileID: 1737185364}
