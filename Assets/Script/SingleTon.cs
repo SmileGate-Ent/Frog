@@ -42,7 +42,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         if (IsInitialized)
         {
-            Debug.LogError(GetType().Name + " Singleton class is already created.");
+            //Debug.LogError(GetType().Name + " Singleton class is already created.");
             Destroy(gameObject);
             return;
         }
