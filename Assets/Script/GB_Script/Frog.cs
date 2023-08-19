@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour
 {
+    public static Frog Instance;
     [SerializeField] float moveSpeed = 10;
     
     //[SerializeField] GameObject tongueTargetPrefab; // 생성할 게임 오브젝트 프리팹입니다.
@@ -19,6 +20,33 @@ public class Frog : MonoBehaviour
     Vector2? tongueTargetPos;
     float tongueTargetFirstLength;
     [SerializeField] Transform tongueTip;
+
+    [SerializeField] int hp;
+    [SerializeField] int score;
+
+    public int Hp
+    {
+        get => hp;
+        set
+        {
+            hp = value;
+            FrogCanvas.Instance.HpText = $"HP: {Hp}";
+        }
+    }
+    public int Score
+    {
+        get => score;
+        set
+        {
+            score = value;
+            FrogCanvas.Instance.ScoreText = $"Score: {Score}";
+        }
+    }
+ 
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Update()
     {
