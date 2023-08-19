@@ -13,6 +13,8 @@ public class Frog : MonoBehaviour
 
     [SerializeField] Camera cam;
 
+    [SerializeField] float tongueScale = 1.0f / 3;
+
     [SerializeField] SpriteRenderer tongue;
     [SerializeField] Transform tonguePivot;
     [SerializeField] Transform tonguePos;
@@ -41,13 +43,15 @@ public class Frog : MonoBehaviour
     [SerializeField] AudioClip jumpClip;
     [SerializeField] AudioClip tongueClip;
     [SerializeField] AudioClip scoreClip;
-    
-    
+
     [SerializeField] LayerMask layers;
     [SerializeField] GameObject dieWater;
     [SerializeField] GameObject[] frogpivot;
 
     [SerializeField] SpriteRenderer frogSprite;
+
+    [SerializeField] Sprite frogIdleSprite;
+    [SerializeField] Sprite frogJumpSprite;
 
     float jumpCurrentDuration;
     bool isJump;
@@ -79,6 +83,8 @@ public class Frog : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        tonguePivot.localScale = Vector3.one * tongueScale;
     }
 
     void OnDrawGizmos()
@@ -100,6 +106,8 @@ public class Frog : MonoBehaviour
             isJump = true;
             jumpCurrentDuration = 0;
             sfxAudioSource.PlayOneShot(jumpClip);
+
+            frogSprite.sprite = frogJumpSprite;
         }
 
         if (isJump && !isDie)
@@ -108,19 +116,24 @@ public class Frog : MonoBehaviour
             {
                 transform.Translate(moveDeltaDuringJump * (moveSpeed * Time.deltaTime), Space.Self);
             }
+            else
+            {
+                frogSprite.sprite = frogIdleSprite;
+            }
 
             jumpCurrentDuration += Time.deltaTime;
             if (jumpCurrentDuration >= jumpTotalDuration)
             {
-                if (!Physics2D.OverlapCircle(transform.position, 2,layers))
+                if (!Physics2D.OverlapCircle(transform.position, 2, layers))
                 {
-                    var a = Instantiate(dieWater, transform.position,quaternion.identity);
+                    var a = Instantiate(dieWater, transform.position, quaternion.identity);
                     Destroy(a, 1f);
                     isDie = true;
-                    Invoke("ReSpawn",3f);
+                    Invoke("ReSpawn", 3f);
                     frogpivot[0].SetActive(false);
                     frogpivot[1].SetActive(false);
                 }
+
                 isJump = false;
                 jumpCurrentDuration = 0;
             }
@@ -187,13 +200,13 @@ public class Frog : MonoBehaviour
 
         if (tongueTargetPos != null)
         {
-            tongueTargetLength = Vector3.Distance(tonguePivot.position, tongueTargetPos.Value) * 2;
+            tongueTargetLength = Vector3.Distance(tonguePivot.position, tongueTargetPos.Value) / tongueScale;
 
             tonguePivot.transform.LookAt(tongueTargetPos.Value, Vector3.forward);
 
             // 목표하는 혀 길이보다 0.1f보다 조금 짧은 순간이 오면 다시 혀를 말아 들인다.
-            if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.2f
-                )
+            if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.1f
+               )
             {
                 tongueTargetLength = 0;
                 tongueTargetPos = null;
@@ -208,6 +221,7 @@ public class Frog : MonoBehaviour
         transform.position = Vector3.zero;
         isDie = false;
     }
+
     public void PlayScoreClip()
     {
         sfxAudioSource.PlayOneShot(scoreClip);
