@@ -51,6 +51,7 @@ public class Frog : MonoBehaviour
 
     float jumpCurrentDuration;
     bool isJump;
+    bool isDie;
     Vector2 moveDeltaDuringJump;
 
     float JumpNormalizedDuration => jumpCurrentDuration / jumpTotalDuration;
@@ -101,7 +102,7 @@ public class Frog : MonoBehaviour
             sfxAudioSource.PlayOneShot(jumpClip);
         }
 
-        if (isJump)
+        if (isJump && !isDie)
         {
             if (JumpNormalizedDuration < jumpMoveRatioInCurve)
             {
@@ -115,6 +116,7 @@ public class Frog : MonoBehaviour
                 {
                     var a = Instantiate(dieWater, transform.position,quaternion.identity);
                     Destroy(a, 1f);
+                    isDie = true;
                     Invoke("ReSpawn",3f);
                     frogpivot[0].SetActive(false);
                     frogpivot[1].SetActive(false);
@@ -204,6 +206,7 @@ public class Frog : MonoBehaviour
         frogpivot[0].SetActive(true);
         frogpivot[1].SetActive(true);
         transform.position = Vector3.zero;
+        isDie = false;
     }
     public void PlayScoreClip()
     {
