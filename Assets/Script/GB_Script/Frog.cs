@@ -42,12 +42,14 @@ public class Frog : MonoBehaviour
     [SerializeField] AudioClip tongueClip;
     [SerializeField] AudioClip scoreClip;
     
-    
     [SerializeField] LayerMask layers;
     [SerializeField] GameObject dieWater;
     [SerializeField] GameObject[] frogpivot;
 
     [SerializeField] SpriteRenderer frogSprite;
+
+    [SerializeField] Sprite frogIdleSprite;
+    [SerializeField] Sprite frogJumpSprite;
 
     float jumpCurrentDuration;
     bool isJump;
@@ -99,6 +101,8 @@ public class Frog : MonoBehaviour
             isJump = true;
             jumpCurrentDuration = 0;
             sfxAudioSource.PlayOneShot(jumpClip);
+
+            frogSprite.sprite = frogJumpSprite;
         }
 
         if (isJump)
@@ -106,6 +110,10 @@ public class Frog : MonoBehaviour
             if (JumpNormalizedDuration < jumpMoveRatioInCurve)
             {
                 transform.Translate(moveDeltaDuringJump * (moveSpeed * Time.deltaTime), Space.Self);
+            }
+            else
+            {
+                frogSprite.sprite = frogIdleSprite;
             }
 
             jumpCurrentDuration += Time.deltaTime;
@@ -121,6 +129,8 @@ public class Frog : MonoBehaviour
                 }
                 isJump = false;
                 jumpCurrentDuration = 0;
+                
+                
             }
         }
 
