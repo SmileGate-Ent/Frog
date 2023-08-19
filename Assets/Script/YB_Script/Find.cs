@@ -5,19 +5,34 @@ using UnityEngine.AI;
 
 public class Find : MonoBehaviour
 {
-    [SerializeField] private Transform moveTarget;
+    [SerializeField] private Vector2 moveTarget;
+    [SerializeField] private Vector2 movePosition;
+    [SerializeField] private LayerMask moveLayer;
 
     private NavMeshAgent _agent;
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
+        NewTarget();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;    
     }
 
-    // Update is called once per frame
+    private void NewTarget()
+    {
+        moveTarget = new Vector2(Random.Range(-20f, 20f), Random.Range(-20f, 20f));
+        if (!Physics2D.OverlapCircle( new Vector2(transform.position.x + moveTarget.x, transform.position.y + moveTarget.y), 2, moveLayer)) NewTarget();
+        movePosition = new Vector2(transform.position.x + moveTarget.x, transform.position.y + moveTarget.y) ;
+    }
     void Update()
     {
-        _agent.SetDestination(moveTarget.position);
+        if (Vector3.Distance(movePosition, transform.position) > 3f)
+        {
+            _agent.SetDestination(movePosition);
+        }
+        else
+        {
+            NewTarget();
+        }
     }
 }
