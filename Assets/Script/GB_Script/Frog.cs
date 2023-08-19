@@ -57,7 +57,7 @@ public class Frog : MonoBehaviour
 
     [SerializeField] private AnimationCurve hpCurve;
     [SerializeField] private int hpTime;
-    [SerializeField] private Slider hpSlider;
+    [SerializeField] private Image hpSlider;
     
     
     [SerializeField] private Slider debuffSlider;
@@ -294,7 +294,8 @@ public class Frog : MonoBehaviour
             }
         }
         
-        hpSlider.value = Hp;
+        hpSlider.fillAmount = Hp/100;
+        hpSlider.color = Color.HSVToRGB(0.28f*hpSlider.fillAmount,0.85f,0.85f);
 
         debuffSlider.value = Mathf.Max(0, debuffSlider.value - Time.deltaTime);
         debuffSlider.gameObject.SetActive(debuffSlider.value > 0);
@@ -333,7 +334,7 @@ public class Frog : MonoBehaviour
         isDie = true;
         var m = hpTime / 60;
         GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
-        GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{m}:{hpTime%60}";
+        GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{string.Format("{0:D2}",m)}:{string.Format("{0:D2}",hpTime%60)}";
         Destroy(GetComponent<Frog>());
     }
 
