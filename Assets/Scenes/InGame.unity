@@ -321,6 +321,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1355533288202651763, guid: 3e1c59cdfe6d17d45bb9d8ca0f90c7da, type: 3}
+      propertyPath: m_CellSize.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355533288202651763, guid: 3e1c59cdfe6d17d45bb9d8ca0f90c7da, type: 3}
+      propertyPath: m_CellSize.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355533288202651763, guid: 3e1c59cdfe6d17d45bb9d8ca0f90c7da, type: 3}
+      propertyPath: m_CellSize.z
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2693240834927511773, guid: 3e1c59cdfe6d17d45bb9d8ca0f90c7da, type: 3}
       propertyPath: m_Name
       value: Grid (World)
@@ -71281,13 +71293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemParent: {fileID: 1308331075}
-  itemPrefabList:
-  - {fileID: 660185581643088783, guid: 9ca84d0d9d292d049a782eb20c6c87ac, type: 3}
-  - {fileID: 660185581643088783, guid: 750efa6db2a59b446a93268e8d0e002e, type: 3}
-  - {fileID: 660185581643088783, guid: ce2adc5839725ae4dacf2f12abb9406d, type: 3}
-  - {fileID: 660185581643088783, guid: e256ec68e67d843419eb2b86a9b4581f, type: 3}
-  - {fileID: 660185581643088783, guid: 2cb008dcdbb80ca4a8ffb372a75d9c9b, type: 3}
-  - {fileID: 660185581643088783, guid: ad4c0e87b915c5a428f452533f802082, type: 3}
+  itemPrefabList: []
 --- !u!1001 &1314443130
 PrefabInstance:
   m_ObjectHideFlags: 0
