@@ -10,6 +10,10 @@ public class Item : MonoBehaviour
     
     // 먹었을 때 증가하는 점수
     [SerializeField] int deltaScore = 1;
+    
+    // 먹었을 때 변경되는 외형
+    [SerializeField] CharacterPreset preset;
+
     /*
     [SerializeField] Sprite[] spriteList;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -37,6 +41,12 @@ public class Item : MonoBehaviour
                 Frog.Instance.Hp += deltaHp;
                 Frog.Instance.PlayScoreClip();
                 Destroy(gameObject);
+
+                // 외형 변경!!!
+                if (preset != null)
+                {
+                    Frog.Instance.Preset = preset;
+                }
             }
         }
         else
