@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -65,6 +66,8 @@ public class Frog : MonoBehaviour
     [SerializeField] SpriteRenderer idleSpriteRenderer;
     [SerializeField] SpriteRenderer attackSpriteRenderer;
     [SerializeField] SpriteRenderer jumpSpriteRenderer;
+    
+    [SerializeField] GameObject gameOverPopup;
 
     float jumpCurrentDuration;
     bool isJump;
@@ -125,6 +128,10 @@ public class Frog : MonoBehaviour
     IEnumerator HpCalculation()
     {
         Hp -= hpCurve.Evaluate(hpTime);
+        if (hp <= 0)
+        {
+            Die();
+        }
         yield return new WaitForSeconds(1f);
         hpTime++;
         StartCoroutine(HpCalculation());
@@ -168,10 +175,7 @@ public class Frog : MonoBehaviour
                 {
                     var a = Instantiate(dieWater, transform.position, quaternion.identity);
                     Destroy(a, 1f);
-                    isDie = true;
-                    Invoke("ReSpawn", 3f);
-                    frogpivot[0].SetActive(false);
-                    frogpivot[1].SetActive(false);
+                    Die();
                 }
 
                 isJump = false;
@@ -312,12 +316,16 @@ public class Frog : MonoBehaviour
         frogMouth.SetActive(spriteState == SpriteState.Attack);
     }
 
-    private void ReSpawn()
+    private void Die()
     {
-        frogpivot[0].SetActive(true);
-        frogpivot[1].SetActive(true);
-        transform.position = Vector3.zero;
-        isDie = false;
+        gameOverPopup.SetActive(true);
+        frogpivot[0].SetActive(false);
+        frogpivot[1].SetActive(false);
+        isDie = true;
+        var m = hpTime / 60;
+        GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
+        GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{m}:{hpTime%60}";
+        Destroy(GetComponent<Frog>());
     }
 
     public void PlayScoreClip()
