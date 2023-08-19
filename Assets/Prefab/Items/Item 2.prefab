@@ -109,7 +109,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  deltaHp: 5
+  deltaHp: 15
   deltaScore: 20
   preset: {fileID: 0}
 --- !u!50 &6821484152093842742
