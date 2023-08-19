@@ -131,7 +131,7 @@ public class Frog : MonoBehaviour
     
     void Update()
     {
-        debuffSlider.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, -1.5f, 0));
+        debuffSlider.transform.position = cam.WorldToScreenPoint(transform.position + new Vector3(0, -1.5f, 0));
         
         var dx = Input.GetAxisRaw("Horizontal");
         var dy = Input.GetAxisRaw("Vertical");
@@ -319,13 +319,18 @@ public class Frog : MonoBehaviour
         item.transform.SetParent(tongueTip);
     }
     
-    public void AttachItemToTongue(Enemy item)
+    public void AttachItemToTongue(Enemy enemy)
     {
-        item.transform.SetParent(tongueTip);
+        enemy.transform.SetParent(tongueTip);
     }
 
     public bool IsAttachedToTongue(Item item)
     {
         return item.transform.parent == tongueTip;
+    }
+    
+    public bool IsAttachedToTongue(Enemy enemy)
+    {
+        return enemy.transform.parent == tongueTip;
     }
 }
