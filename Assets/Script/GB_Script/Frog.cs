@@ -85,6 +85,7 @@ public class Frog : MonoBehaviour
     }
 
     SpriteState spriteState;
+    bool isExitPopup;
 
     public CharacterPreset Preset
     {
@@ -178,16 +179,19 @@ public class Frog : MonoBehaviour
             }
         }
 
-        
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (isExitPopup == false && Input.GetKeyDown(KeyCode.Escape))
         {
+            isExitPopup = true;
             var popup = FrogCanvas.Instance.InstantiateConfirmPopup();
             popup.Text = "종료하시겠습니까?";
             popup.Btn1Text = "예";
             popup.Btn2Text = "아니요";
             popup.OnBtn1 = () => SceneManager.LoadScene("TitleScene");
-            popup.OnBtn2 = () => Destroy(popup.gameObject);
+            popup.OnBtn2 = () =>
+            {
+                isExitPopup = false;
+                Destroy(popup.gameObject);
+            };
         }
 
         // 점프에 의한 개구리 스프라이트 위치 조절
@@ -227,7 +231,7 @@ public class Frog : MonoBehaviour
             tongueTargetPos = worldPoint;
             if (tongueTargetPos != null)
             {
-                tongueTargetFirstLength = Vector3.Distance(transform.position, tongueTargetPos.Value);
+                tongueTargetFirstLength = Vector3.Distance(tonguePivot.position, tongueTargetPos.Value);
             }
 
             sfxAudioSource.PlayOneShot(tongueClip);
@@ -264,7 +268,7 @@ public class Frog : MonoBehaviour
             tonguePivot.transform.LookAt(tongueTargetPos.Value, Vector3.forward);
 
             // 목표하는 혀 길이보다 0.1f보다 조금 짧은 순간이 오면 다시 혀를 말아 들인다.
-            if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.1f
+            if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.05f
                 || tongueLocalScale.x > tongueTargetFirstLength / tongueScale
                )
             {
@@ -281,12 +285,15 @@ public class Frog : MonoBehaviour
         {
             foreach (var c in tongueTip.Cast<Transform>())
             {
+                // 혹시 먹은 게 적이면 디버프 시작
+                if (c.GetComponent<Enemy>() != null)
+                {
+                    StartDebuff();
+                }
                 Destroy(c.gameObject);
             }
         }
         
-        
-
         damageOverTimeDuration += Time.deltaTime;
         if (damageOverTimeDuration >= BalancePlanner.Instance.CurrentPlan.DamageOverTimeInterval)
         {
@@ -327,20 +334,29 @@ public class Frog : MonoBehaviour
         frogMouth.SetActive(spriteState == SpriteState.Attack);
     }
 
-    private void Die()
+    IEnumerator OpenDelayedGameOverPopup()
     {
+        yield return new WaitForSeconds(2);
+        
         if (gameOverPopup != null)
         {
             gameOverPopup.SetActive(true);
+            
+            GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
+            var gameTime = TimeSpan.FromSeconds(BalancePlanner.Instance.GameTime);
+            GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{gameTime.Minutes:D2}:{gameTime.Seconds:D2}";
+            
+            Destroy(GetComponent<Frog>());
         }
+    }
+
+    private void Die()
+    {
+        StartCoroutine(OpenDelayedGameOverPopup());
 
         frogpivot[0].SetActive(false);
         frogpivot[1].SetActive(false);
         isDie = true;
-        GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
-        var gameTime = TimeSpan.FromSeconds(BalancePlanner.Instance.GameTime);
-        GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{gameTime.Minutes:D2}:{gameTime.Seconds:D2}";
-        Destroy(GetComponent<Frog>());
     }
 
     public void PlayScoreClip()
