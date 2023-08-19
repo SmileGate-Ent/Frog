@@ -7,5 +7,6 @@ public class Item : MonoBehaviour
         Destroy(gameObject);
 
         Frog.Instance.Score++;
+        Frog.Instance.PlayScoreClip();
     }
 }

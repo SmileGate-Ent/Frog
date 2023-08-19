@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Frog : MonoBehaviour
@@ -30,6 +29,11 @@ public class Frog : MonoBehaviour
     [SerializeField] Transform frogSprite;
     [SerializeField] float jumpMoveRatioInCurve = 0.9f;
     [SerializeField] Transform shadowPivot;
+    
+    [SerializeField] AudioSource sfxAudioSource;
+    [SerializeField] AudioClip jumpClip;
+    [SerializeField] AudioClip tongueClip;
+    [SerializeField] AudioClip scoreClip;
 
     float jumpCurrentDuration;
     bool isJump;
@@ -71,6 +75,7 @@ public class Frog : MonoBehaviour
 
             isJump = true;
             jumpCurrentDuration = 0;
+            sfxAudioSource.PlayOneShot(jumpClip);
         }
 
         if (isJump)
@@ -112,6 +117,8 @@ public class Frog : MonoBehaviour
             {
                 tongueTargetFirstLength = Vector3.Distance(transform.position, tongueTargetPos.Value);
             }
+            
+            sfxAudioSource.PlayOneShot(tongueClip);
 
             // 씬에 프리팹 게임 오브젝트를 클릭한 위치에 생성합니다.
             //Instantiate(tongueTargetPrefab, worldPoint, Quaternion.identity);
@@ -140,5 +147,10 @@ public class Frog : MonoBehaviour
                 tongueTargetPos = null;
             }
         }
+    }
+
+    public void PlayScoreClip()
+    {
+        sfxAudioSource.PlayOneShot(scoreClip);
     }
 }
