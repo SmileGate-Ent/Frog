@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3d5eee69c42bde4ea0f127876b81d11, type: 3}
-  m_Name: Beaver
+  m_Name: 5-Student
   m_EditorClassIdentifier: 
-  frogIdleSprite: {fileID: 0}
-  frogJumpSprite: {fileID: 0}
-  frogAttackSprite: {fileID: 0}
+  idleSprite: {fileID: 21300000, guid: 5ec8e82b43a50574fab5690053958b5c, type: 3}
+  attackSprite: {fileID: 21300000, guid: 5aed9a1da021f9c4688313c5bff8f72b, type: 3}
+  jumpSprite: {fileID: 21300000, guid: e844c69bf997f8a4a974a83b68ce49ed, type: 3}
