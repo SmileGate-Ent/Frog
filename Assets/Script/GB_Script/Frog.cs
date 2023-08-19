@@ -171,7 +171,7 @@ public class Frog : MonoBehaviour
                     Debug.Log("Instantiate dieWater");
                     var a = Instantiate(dieWater, shadow.position, quaternion.identity);
                     Destroy(a, 1f);
-                    Die();
+                    Die(true);
                 }
 
                 isJump = false;
@@ -303,7 +303,7 @@ public class Frog : MonoBehaviour
         
         if (Hp <= 0 && isDie == false)
         {
-            Die();
+            Die(false);
         }
         
         // 맨 마지막에 처리해야한다.
@@ -338,6 +338,11 @@ public class Frog : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         
+        OpenGameOverPopup();
+    }
+
+    void OpenGameOverPopup()
+    {
         if (gameOverPopup != null)
         {
             gameOverPopup.SetActive(true);
@@ -350,9 +355,16 @@ public class Frog : MonoBehaviour
         }
     }
 
-    private void Die()
+    private void Die(bool byWater)
     {
-        StartCoroutine(OpenDelayedGameOverPopup());
+        if (byWater)
+        {
+            StartCoroutine(OpenDelayedGameOverPopup());
+        }
+        else
+        {
+            OpenGameOverPopup();
+        }
 
         frogpivot[0].SetActive(false);
         frogpivot[1].SetActive(false);
