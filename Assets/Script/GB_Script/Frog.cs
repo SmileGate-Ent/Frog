@@ -101,7 +101,7 @@ public class Frog : MonoBehaviour
     public float Hp
     {
         get => hp;
-        set => hp = value;
+        set => hp = Mathf.Min(100, value);
     }
 
     public int Score
@@ -138,7 +138,7 @@ public class Frog : MonoBehaviour
         var dy = Input.GetAxisRaw("Vertical");
         if ((dx != 0 || dy != 0) && isJump == false)
         {
-            moveDeltaDuringJump = new Vector2(dx, dy).normalized;
+            moveDeltaDuringJump = new Vector2(dx, dy).normalized;// + Stick.Instance.NormalizedDirection;
 
             isJump = true;
             jumpCurrentDuration = 0;
@@ -286,7 +286,7 @@ public class Frog : MonoBehaviour
             foreach (var c in tongueTip.Cast<Transform>())
             {
                 // 혹시 먹은 게 적이면 디버프 시작
-                if (c.GetComponent<Enemy>() is var e)
+                if (c != null && c.GetComponent<Enemy>() is var e)
                 {
                     OnEatEnemy(e.DeltaScore);
                 }
@@ -357,6 +357,9 @@ public class Frog : MonoBehaviour
 
     private void Die(bool byWater)
     {
+        Hp = 0;
+        hpSlider.fillAmount = 0;
+        
         if (byWater)
         {
             StartCoroutine(OpenDelayedGameOverPopup());

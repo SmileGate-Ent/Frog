@@ -9,11 +9,19 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private Vector2 moveTarget;
     [SerializeField] private LayerMask moveLayer;
     [SerializeField] private Transform[] camPos;
-
+    [SerializeField] Transform worldMin;
+    [SerializeField] Transform worldMax;
+    
     private void Start()
     {
         NewTarget();
         StartCoroutine(SpawnCoroutine());
+
+        for (var i = 0; i < 50; i++)
+        {
+            NewTargetInWorld();
+            Spawn();
+        }
     }
 
     private void NewTarget()
@@ -32,12 +40,25 @@ public class ItemManager : MonoBehaviour
         if (!Physics2D.OverlapCircle(moveTarget, 2, moveLayer)) NewTarget();
     }
 
+    void NewTargetInWorld()
+    {
+        moveTarget = new Vector2(Random.Range(worldMin.position.x, worldMax.position.x),
+            Random.Range(worldMin.position.y, worldMax.position.y));
+        
+        if (!Physics2D.OverlapCircle(moveTarget, 2, moveLayer)) NewTargetInWorld();
+    }
+
     private IEnumerator SpawnCoroutine()
     {
-        var prefab = BalancePlanner.Instance.CurrentPlan.RandomSpawnItem;
-        Instantiate(prefab, moveTarget, prefab.transform.localRotation, itemParent);
+        Spawn();
         yield return new WaitForSeconds(BalancePlanner.Instance.CurrentPlan.RandomSpawnItemInterval);
         NewTarget();
         StartCoroutine(SpawnCoroutine());
+    }
+
+    void Spawn()
+    {
+        var prefab = BalancePlanner.Instance.CurrentPlan.RandomSpawnItem;
+        Instantiate(prefab, moveTarget, prefab.transform.localRotation, itemParent);
     }
 }
