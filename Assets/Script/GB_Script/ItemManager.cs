@@ -31,7 +31,8 @@ public class ItemManager : MonoBehaviour
     }
     private IEnumerator SpawnCoroutine()
     {
-        Instantiate(itemPrefabList[Random.Range(0, itemPrefabList.Length)],moveTarget, Quaternion.identity,itemParent);
+        var prefab = itemPrefabList[Random.Range(0, itemPrefabList.Length)];
+        Instantiate(prefab,moveTarget, prefab.transform.localRotation, itemParent);
         yield return new WaitForSeconds(Random.Range(3f, 5f));
         NewTarget();
         StartCoroutine(SpawnCoroutine());
