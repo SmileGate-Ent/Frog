@@ -25,6 +25,17 @@ public class Frog : MonoBehaviour
     [SerializeField] int score;
 
     [SerializeField] AnimationCurve jumpHeightCurve;
+    [SerializeField] float jumpTotalDuration = 0.5f;
+    [SerializeField] float jumpHeight = 2.0f;
+    [SerializeField] Transform frogSprite;
+    [SerializeField] float jumpMoveRatioInCurve = 0.9f;
+    [SerializeField] Transform shadowPivot;
+
+    float jumpCurrentDuration;
+    bool isJump;
+    Vector2 moveDeltaDuringJump;
+
+    float JumpNormalizedDuration => jumpCurrentDuration / jumpTotalDuration;
 
     public int Hp
     {
@@ -54,12 +65,37 @@ public class Frog : MonoBehaviour
     {
         var dx = Input.GetAxisRaw("Horizontal");
         var dy = Input.GetAxisRaw("Vertical");
-        if (dx != 0 || dy != 0)
+        if ((dx != 0 || dy != 0) && isJump == false)
         {
-            var d = new Vector2(dx, dy).normalized;
+            moveDeltaDuringJump = new Vector2(dx, dy).normalized;
 
-            transform.Translate(d * (moveSpeed * Time.deltaTime), Space.Self);
+            isJump = true;
+            jumpCurrentDuration = 0;
         }
+
+        if (isJump)
+        {
+            if (JumpNormalizedDuration < jumpMoveRatioInCurve)
+            {
+                transform.Translate(moveDeltaDuringJump * (moveSpeed * Time.deltaTime), Space.Self);
+            }
+
+            jumpCurrentDuration += Time.deltaTime;
+            if (jumpCurrentDuration >= jumpTotalDuration)
+            {
+                isJump = false;
+                jumpCurrentDuration = 0;
+            }
+        }
+
+        // 점프에 의한 개구리 스프라이트 위치 조절
+        var frogSpriteLocalPos = frogSprite.transform.localPosition;
+        var jumpHeightCurveVal = jumpHeightCurve.Evaluate(JumpNormalizedDuration);
+        frogSpriteLocalPos.y = jumpHeightCurveVal * jumpHeight;
+        frogSprite.transform.localPosition = frogSpriteLocalPos;
+        
+        // 점프에 의한 그림자 크기 조절
+        shadowPivot.localScale = Vector3.one * (1.0f - jumpHeightCurveVal * 0.3f);
         
         // 왼쪽 마우스 버튼이 클릭되었을 때
         if (Input.GetMouseButtonDown(0))
