@@ -365,6 +365,8 @@ public class Frog : MonoBehaviour
         {
             OpenGameOverPopup();
         }
+        
+        BalancePlanner.Instance.gameObject.SetActive(false);
 
         frogpivot[0].SetActive(false);
         frogpivot[1].SetActive(false);
