@@ -1025,6 +1025,7 @@ MonoBehaviour:
   tongueClip: {fileID: 8300000, guid: c6088f34c77e3f34196946c57a5aed87, type: 3}
   scoreClip: {fileID: 8300000, guid: 9a5daa9dd312f714680fe31c053996cc, type: 3}
   damageClip: {fileID: 8300000, guid: b24db804f292388449057896992420c7, type: 3}
+  waterDropClip: {fileID: 8300000, guid: de98221067c3042449d3d819f05fc66e, type: 3}
   layers:
     serializedVersion: 2
     m_Bits: 512

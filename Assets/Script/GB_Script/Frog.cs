@@ -48,6 +48,7 @@ public class Frog : MonoBehaviour
     [SerializeField] AudioClip tongueClip;
     [SerializeField] AudioClip scoreClip;
     [SerializeField] AudioClip damageClip;
+    [SerializeField] AudioClip waterDropClip;
     
     [SerializeField] LayerMask layers;
     [SerializeField] GameObject dieWater;
@@ -362,6 +363,7 @@ public class Frog : MonoBehaviour
         
         if (byWater)
         {
+            sfxAudioSource.PlayOneShot(waterDropClip);
             StartCoroutine(OpenDelayedGameOverPopup());
         }
         else
