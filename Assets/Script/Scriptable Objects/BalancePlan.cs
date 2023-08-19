@@ -22,9 +22,11 @@ public class BalancePlan : ScriptableObject
     [SerializeField] float enemySpawnInterval;
 
     public float ApplyTime => applyTime;
-    public Item[] SpawnItemList => spawnItemList;
-    public float SpawnItemInterval => spawnItemInterval;
+    //public Item[] SpawnItemList => spawnItemList;
+    public Item RandomSpawnItem => spawnItemList[Random.Range(0, spawnItemList.Length)];
+    //public float SpawnItemInterval => spawnItemInterval;
+    public float RandomSpawnItemInterval => Random.Range(spawnItemInterval * 0.9f, spawnItemInterval * 1.1f);
     public float DamageOverTime => damageOverTime;
     public float DamageOverTimeInterval => damageOverTimeInterval;
-    public float EnemySpawnInterval => enemySpawnInterval;
+    public float RandomSpawnEnemyInterval => Random.Range(enemySpawnInterval * 0.9f, enemySpawnInterval * 1.1f);
 }

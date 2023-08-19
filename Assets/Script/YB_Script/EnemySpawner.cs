@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnCoroutine()
     {
         Instantiate(monster, moveTarget, Quaternion.identity);
-        yield return new WaitForSeconds(Random.Range(5f, 10f));
+        yield return new WaitForSeconds(BalancePlanner.Instance.CurrentPlan.RandomSpawnEnemyInterval);
         NewTarget();
         StartCoroutine(SpawnCoroutine());
     }

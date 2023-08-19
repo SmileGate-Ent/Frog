@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] LayerMask tongueLayer;
     [SerializeField] LayerMask frogBodyLayer;
 
+    [SerializeField] float damage = 30;
+
     private NavMeshAgent _agent;
     void Start()
     {
@@ -63,7 +65,7 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                Frog.Instance.Hp -= 30;
+                Frog.Instance.Hp -= damage;
             }
         }
         else

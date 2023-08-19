@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using TMPro;
@@ -56,8 +57,6 @@ public class Frog : MonoBehaviour
 
     [SerializeField] GameObject frogMouth;
 
-    [SerializeField] private AnimationCurve hpCurve;
-    [SerializeField] private int hpTime;
     [SerializeField] private Image hpSlider;
     
     
@@ -75,6 +74,8 @@ public class Frog : MonoBehaviour
     bool isJump;
     bool isDie;
     Vector2 moveDeltaDuringJump;
+
+    float damageOverTimeDuration;
 
     enum SpriteState
     {
@@ -113,7 +114,6 @@ public class Frog : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        StartCoroutine(HpCalculation());
         tonguePivot.localScale = Vector3.one * tongueScale;
 
         spriteState = SpriteState.Idle;
@@ -127,18 +127,6 @@ public class Frog : MonoBehaviour
         }
     }
 
-    IEnumerator HpCalculation()
-    {
-        Hp -= hpCurve.Evaluate(hpTime);
-        if (hp <= 0 && isDie == false)
-        {
-            Die();
-        }
-        yield return new WaitForSeconds(1f);
-        hpTime++;
-        StartCoroutine(HpCalculation());
-    }
-    
     void Update()
     {
         debuffSlider.transform.position = cam.WorldToScreenPoint(transform.position + new Vector3(0, -1.5f, 0));
@@ -295,6 +283,21 @@ public class Frog : MonoBehaviour
             }
         }
         
+        
+
+        damageOverTimeDuration += Time.deltaTime;
+        if (damageOverTimeDuration >= BalancePlanner.Instance.CurrentPlan.DamageOverTimeInterval)
+        {
+            damageOverTimeDuration = 0;
+            Hp -= BalancePlanner.Instance.CurrentPlan.DamageOverTime;
+        }
+        
+        if (Hp <= 0 && isDie == false)
+        {
+            Die();
+        }
+        
+        // 맨 마지막에 처리해야한다.
         hpSlider.fillAmount = Hp/100;
         hpSlider.color = Color.HSVToRGB(0.28f*hpSlider.fillAmount,0.85f,0.85f);
 
@@ -331,11 +334,10 @@ public class Frog : MonoBehaviour
 
         frogpivot[0].SetActive(false);
         frogpivot[1].SetActive(false);
-        Debug.Log("isDie to true");
         isDie = true;
-        var m = hpTime / 60;
         GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
-        GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{string.Format("{0:D2}",m)}:{string.Format("{0:D2}",hpTime%60)}";
+        var gameTime = TimeSpan.FromSeconds(BalancePlanner.Instance.GameTime);
+        GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{gameTime.Minutes:D2}:{gameTime.Seconds:D2}";
         Destroy(GetComponent<Frog>());
     }
 

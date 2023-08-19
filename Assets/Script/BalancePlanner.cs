@@ -13,6 +13,8 @@ public class BalancePlanner : MonoBehaviour
     
     BalancePlan NextPlan => curPlanIndex + 1 < planList.Length ? planList[curPlanIndex + 1] : null;
 
+    public float GameTime => gameTime;
+
     void Awake()
     {
         Instance = this;
