@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Submerged
-  m_Shader: {fileID: -6465566751694194690, guid: 2363321b77a7b8b4b863e2a51def12b0,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 2363321b77a7b8b4b863e2a51def12b0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -100,8 +99,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_2B7C42F7: {r: 54.96034, g: 63.07595, b: 49.09213, a: 0}
-    - Color_DB714CC1: {r: 0.25098038, g: 1, b: 0.9613745, a: 0}
+    - Color_2B7C42F7: {r: 36.39322, g: 84.21134, b: 0.52962065, a: 0}
+    - Color_DB714CC1: {r: 0.16666657, g: 1, b: 0.9573259, a: 0}
     - Vector4_47405F4E: {r: 10, g: 10, b: 0, a: 0}
     - Vector4_85FB229A: {r: 0.2, g: 0.2, b: 0.2, a: 0.2}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
