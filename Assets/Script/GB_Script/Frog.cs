@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -274,6 +275,16 @@ public class Frog : MonoBehaviour
         }
 
         UpdateFrogSprite();
+
+        // 간혹 혀 끝에 붙은 오브젝트가 사라지지 않는다.
+        // 안전장치 추가!
+        if (spriteState == SpriteState.Idle)
+        {
+            foreach (var c in tongueTip.Cast<Transform>())
+            {
+                Destroy(c.gameObject);
+            }
+        }
         
         hpSlider.value = Hp;
 
