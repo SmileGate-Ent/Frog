@@ -7782,6 +7782,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   credit: {fileID: 0}
   setting: {fileID: 0}
+--- !u!1 &1283691013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1283691015}
+  - component: {fileID: 1283691014}
+  m_Layer: 0
+  m_Name: Balance Planner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1283691014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283691013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6402c076b492014e95995978aa28ab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planList:
+  - {fileID: 11400000, guid: 759641510f6435840979094fc1628557, type: 2}
+  - {fileID: 11400000, guid: 1c91ed796b94753499d8ef8cbc3e61b2, type: 2}
+  - {fileID: 11400000, guid: 56921ec4340704a4cb74fdbebdbc2eb8, type: 2}
+  - {fileID: 11400000, guid: e2305c4e87b5b3e498f2a5393c68371c, type: 2}
+  - {fileID: 11400000, guid: a92a80ca7af752f478d442bf46ef63b6, type: 2}
+--- !u!4 &1283691015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283691013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1308331074
 GameObject:
   m_ObjectHideFlags: 0
@@ -9742,3 +9792,4 @@ SceneRoots:
   - {fileID: 366719814}
   - {fileID: 2049480608}
   - {fileID: 1548205517}
+  - {fileID: 1283691015}
