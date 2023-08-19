@@ -88,14 +88,10 @@ public class Frog : MonoBehaviour
 
     public bool CanCatch => tongueTargetLength > 0;
 
-    public int Hp
+    public float Hp
     {
-        get => (int)hp;
-        set
-        {
-            hp = value;
-            FrogCanvas.Instance.HpText = $"HP: {Hp}";
-        }
+        get => hp;
+        set => hp = value;
     }
 
     public int Score
@@ -127,8 +123,7 @@ public class Frog : MonoBehaviour
 
     IEnumerator HpCalculation()
     {
-        hp -= hpCurve.Evaluate(hpTime);
-        hpSlider.value = hp;
+        Hp -= hpCurve.Evaluate(hpTime);
         yield return new WaitForSeconds(1f);
         hpTime++;
         StartCoroutine(HpCalculation());
@@ -280,6 +275,8 @@ public class Frog : MonoBehaviour
 
         UpdateFrogSprite();
         
+        hpSlider.value = Hp;
+
         debuffSlider.value = Mathf.Max(0, debuffSlider.value - Time.deltaTime);
         debuffSlider.gameObject.SetActive(debuffSlider.value > 0);
     }
