@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +6,7 @@ public class Find : MonoBehaviour
     [SerializeField] private Vector2 moveTarget;
     [SerializeField] private Vector2 movePosition;
     [SerializeField] private LayerMask moveLayer;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     private NavMeshAgent _agent;
     void Start()
@@ -24,6 +23,7 @@ public class Find : MonoBehaviour
         if (!Physics2D.OverlapCircle( new Vector2(transform.position.x + moveTarget.x, transform.position.y + moveTarget.y), 2, moveLayer)) NewTarget();
         movePosition = new Vector2(transform.position.x + moveTarget.x, transform.position.y + moveTarget.y) ;
     }
+    
     void Update()
     {
         if (Vector3.Distance(movePosition, transform.position) > 3f)
@@ -34,5 +34,7 @@ public class Find : MonoBehaviour
         {
             NewTarget();
         }
+
+        spriteRenderer.flipX = _agent.desiredVelocity.x > 0;
     }
 }
