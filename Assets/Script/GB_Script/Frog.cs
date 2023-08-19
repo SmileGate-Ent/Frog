@@ -50,19 +50,36 @@ public class Frog : MonoBehaviour
 
     [SerializeField] SpriteRenderer frogSprite;
 
-    [SerializeField] Sprite frogIdleSprite;
-    [SerializeField] Sprite frogJumpSprite;
-    [SerializeField] Sprite frogAttackSprite;
     [SerializeField] GameObject frogMouth;
 
     [SerializeField] private AnimationCurve hpCurve;
     [SerializeField] private int hpTime;
     [SerializeField] private Slider hpSlider;
 
+    [SerializeField] CharacterPreset preset;
+
+    [SerializeField] SpriteRenderer idleSpriteRenderer;
+    [SerializeField] SpriteRenderer attackSpriteRenderer;
+    [SerializeField] SpriteRenderer jumpSpriteRenderer;
+
     float jumpCurrentDuration;
     bool isJump;
     bool isDie;
     Vector2 moveDeltaDuringJump;
+
+    enum SpriteState
+    {
+        Idle,
+        Attack,
+        Jump,
+    }
+
+    SpriteState spriteState;
+
+    public CharacterPreset Preset
+    {
+        set => preset = value;
+    }
 
     float JumpNormalizedDuration => jumpCurrentDuration / jumpTotalDuration;
 
@@ -93,6 +110,8 @@ public class Frog : MonoBehaviour
         Instance = this;
         StartCoroutine(HpCalculation());
         tonguePivot.localScale = Vector3.one * tongueScale;
+
+        spriteState = SpriteState.Idle;
     }
 
     void OnDrawGizmos()
@@ -124,7 +143,8 @@ public class Frog : MonoBehaviour
             jumpCurrentDuration = 0;
             sfxAudioSource.PlayOneShot(jumpClip);
 
-            frogSprite.sprite = frogJumpSprite;
+            //frogSprite.sprite = frogJumpSprite;
+            spriteState = SpriteState.Jump;
         }
 
         if (isJump && !isDie)
@@ -135,8 +155,9 @@ public class Frog : MonoBehaviour
             }
             else if (tongueTargetPos.HasValue == false) // 혀를 꺼내고 있는 도중에는 Idle로 돌아가지 않아야 한다.
             {
-                frogSprite.sprite = frogIdleSprite;
-                frogMouth.SetActive(false);
+                //frogSprite.sprite = frogIdleSprite;
+                //frogMouth.SetActive(false);
+                spriteState = SpriteState.Idle;
             }
 
             jumpCurrentDuration += Time.deltaTime;
@@ -214,8 +235,9 @@ public class Frog : MonoBehaviour
             // 씬에 프리팹 게임 오브젝트를 클릭한 위치에 생성합니다.
             Instantiate(tongueTargetPrefab, worldPoint, Quaternion.identity);
 
-            frogSprite.sprite = frogAttackSprite;
-            frogMouth.SetActive(true);
+            //frogSprite.sprite = frogAttackSprite;
+            //frogMouth.SetActive(true);
+            spriteState = SpriteState.Attack;
         }
 
         var tongueLocalScale = tongue.size; //.transform.localScale;
@@ -226,8 +248,9 @@ public class Frog : MonoBehaviour
 
         if (tongueLocalScale.x < 0.1f && tongueTargetPos.HasValue == false && isJump == false)
         {
-            frogSprite.sprite = frogIdleSprite;
-            frogMouth.SetActive(false);
+            //frogSprite.sprite = frogIdleSprite;
+            //frogMouth.SetActive(false);
+            spriteState = SpriteState.Idle;
         }
 
         var tongueLocalPos = tonguePos.localPosition;
@@ -249,6 +272,21 @@ public class Frog : MonoBehaviour
                 tongueTargetPos = null;
             }
         }
+
+        UpdateFrogSprite();
+    }
+
+    void UpdateFrogSprite()
+    {
+        idleSpriteRenderer.sprite = preset.IdleSprite;
+        jumpSpriteRenderer.sprite = preset.JumpSprite;
+        attackSpriteRenderer.sprite = preset.AttackSprite;
+        
+        idleSpriteRenderer.gameObject.SetActive(spriteState == SpriteState.Idle);
+        jumpSpriteRenderer.gameObject.SetActive(spriteState == SpriteState.Jump);
+        attackSpriteRenderer.gameObject.SetActive(spriteState == SpriteState.Attack);
+        
+        frogMouth.SetActive(spriteState == SpriteState.Attack);
     }
 
     private void ReSpawn()
