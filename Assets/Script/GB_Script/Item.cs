@@ -9,14 +9,19 @@ public class Item : MonoBehaviour
     {
         if ((tongueLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            Frog.Instance.AttachItemToTongue(this);
+            //if (Frog.Instance.CanCatch)
+            {
+                Frog.Instance.AttachItemToTongue(this);
+            }
         }
         else if ((frogBodyLayer.value & (1 << col.gameObject.layer)) != 0)
         {
-            Frog.Instance.Score++;
-            Frog.Instance.PlayScoreClip();
-            Destroy(gameObject);
-            
+            //if (Frog.Instance.IsAttachedToTongue(this))
+            {
+                Frog.Instance.Score++;
+                Frog.Instance.PlayScoreClip();
+                Destroy(gameObject);
+            }
         }
         else
         {

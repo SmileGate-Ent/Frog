@@ -52,6 +52,8 @@ public class Frog : MonoBehaviour
 
     [SerializeField] Sprite frogIdleSprite;
     [SerializeField] Sprite frogJumpSprite;
+    [SerializeField] Sprite frogAttackSprite;
+    [SerializeField] GameObject frogMouth;
 
     float jumpCurrentDuration;
     bool isJump;
@@ -59,6 +61,8 @@ public class Frog : MonoBehaviour
     Vector2 moveDeltaDuringJump;
 
     float JumpNormalizedDuration => jumpCurrentDuration / jumpTotalDuration;
+
+    public bool CanCatch => tongueTargetLength > 0;
 
     public int Hp
     {
@@ -116,9 +120,10 @@ public class Frog : MonoBehaviour
             {
                 transform.Translate(moveDeltaDuringJump * (moveSpeed * Time.deltaTime), Space.Self);
             }
-            else
+            else if (tongueTargetPos.HasValue == false) // 혀를 꺼내고 있는 도중에는 Idle로 돌아가지 않아야 한다.
             {
                 frogSprite.sprite = frogIdleSprite;
+                frogMouth.SetActive(false);
             }
 
             jumpCurrentDuration += Time.deltaTime;
@@ -139,13 +144,7 @@ public class Frog : MonoBehaviour
             }
         }
 
-        // 개구리 이미지 좌우 뒤집기
-        if (moveDeltaDuringJump.x != 0)
-        {
-            var frogSpritePivotScale = frogSpritePivot.localScale;
-            frogSpritePivotScale.x = moveDeltaDuringJump.x > 0 ? 1 : -1;
-            frogSpritePivot.localScale = frogSpritePivotScale;
-        }
+        
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -165,17 +164,32 @@ public class Frog : MonoBehaviour
 
         // 점프에 의한 그림자 크기 조절
         shadowPivot.localScale = Vector3.one * (1.0f - jumpHeightCurveVal * 0.3f);
+        
+        var mousePos = Input.mousePosition;
+        
+        // 스크린 좌표에서 이러한 월드 좌표를 얻습니다.
+        var worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
+        worldPoint.z = 0; // 생성하려는 게임 오브젝트의 z축 위치를 조정합니다.
+
+        // 개구리 이미지 좌우 뒤집기
+        var frogSpritePivotScale = frogSpritePivot.localScale;
+
+        // [이동 방향에 따른 것]
+        if (moveDeltaDuringJump.x != 0)
+        {
+            frogSpritePivotScale.x = moveDeltaDuringJump.x > 0 ? 1 : -1;
+            frogSpritePivotScale.x = transform.position.x < worldPoint.x ? 1 : -1;
+            frogSpritePivot.localScale = frogSpritePivotScale;
+        }
+        
+        // [마우스 위치에 따른 것]
+        frogSpritePivotScale.x = transform.position.x < worldPoint.x ? 1 : -1;
+        frogSpritePivot.localScale = frogSpritePivotScale;
 
         // 왼쪽 마우스 버튼이 클릭되었을 때
-        if (Input.GetMouseButtonDown(0))
+        // 점프 중일 때는 공격 시작 못한다. 
+        if (Input.GetMouseButtonDown(0) && JumpNormalizedDuration <= 0)
         {
-            // 마우스의 스크린 좌표를 가져옵니다.
-            var mousePos = Input.mousePosition;
-
-            // 스크린 좌표에서 이러한 월드 좌표를 얻습니다.
-            var worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
-            worldPoint.z = 0; // 생성하려는 게임 오브젝트의 z축 위치를 조정합니다.
-
             tongueTargetPos = worldPoint;
             if (tongueTargetPos != null)
             {
@@ -186,6 +200,9 @@ public class Frog : MonoBehaviour
 
             // 씬에 프리팹 게임 오브젝트를 클릭한 위치에 생성합니다.
             Instantiate(tongueTargetPrefab, worldPoint, Quaternion.identity);
+
+            frogSprite.sprite = frogAttackSprite;
+            frogMouth.SetActive(true);
         }
 
         var tongueLocalScale = tongue.size; //.transform.localScale;
@@ -193,6 +210,12 @@ public class Frog : MonoBehaviour
             Mathf.SmoothDamp(tongueLocalScale.x, tongueTargetLength, ref tongueVelocity, tongueSmoothTime);
         //tongue.transform.localScale = tongueLocalScale;
         tongue.size = tongueLocalScale;
+
+        if (tongueLocalScale.x < 0.1f && tongueTargetPos.HasValue == false && isJump == false)
+        {
+            frogSprite.sprite = frogIdleSprite;
+            frogMouth.SetActive(false);
+        }
 
         var tongueLocalPos = tonguePos.localPosition;
         tongueLocalPos.z = tongueLocalScale.x;
@@ -206,6 +229,7 @@ public class Frog : MonoBehaviour
 
             // 목표하는 혀 길이보다 0.1f보다 조금 짧은 순간이 오면 다시 혀를 말아 들인다.
             if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.1f
+                || tongueLocalScale.x > tongueTargetFirstLength / tongueScale
                )
             {
                 tongueTargetLength = 0;
@@ -230,5 +254,10 @@ public class Frog : MonoBehaviour
     public void AttachItemToTongue(Item item)
     {
         item.transform.SetParent(tongueTip);
+    }
+
+    public bool IsAttachedToTongue(Item item)
+    {
+        return item.transform.parent == tongueTip;
     }
 }

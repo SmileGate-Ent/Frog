@@ -70782,16 +70782,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6050913189539212349, guid: 9ca84d0d9d292d049a782eb20c6c87ac, type: 3}
   m_PrefabInstance: {fileID: 835487226}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1214550129 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4219105172810993858, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-  m_PrefabInstance: {fileID: 6894301222887313810}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1229620861 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5878648604615502113, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-  m_PrefabInstance: {fileID: 6894301222887313810}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1257255571
 GameObject:
   m_ObjectHideFlags: 0
@@ -71686,37 +71676,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4505354970507839213, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-      propertyPath: dieWater
-      value: 
-      objectReference: {fileID: 145555119499880662, guid: 502a1e11dfbd4b341bf22cbd8312472f, type: 3}
-    - target: {fileID: 4505354970507839213, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-      propertyPath: layers.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 4505354970507839213, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-      propertyPath: frogpivot.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4505354970507839213, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-      propertyPath: frogpivot.Array.data[0]
-      value: 
-      objectReference: {fileID: 1229620861}
-    - target: {fileID: 4505354970507839213, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-      propertyPath: frogpivot.Array.data[1]
-      value: 
-      objectReference: {fileID: 1214550129}
     - target: {fileID: 7155709360993122915, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
       propertyPath: m_Name
       value: Frog
-      objectReference: {fileID: 0}
-    - target: {fileID: 7155709360993122915, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7155709360993122915, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7324203416836321492, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71757,10 +71719,6 @@ PrefabInstance:
     - target: {fileID: 7324203416836321492, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7812229505555473911, guid: 05e4769e344193e46b7bcf876a6c8d18, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 1007
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
