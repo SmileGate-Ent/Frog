@@ -1102,7 +1102,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   hpTime: 0
   hpSlider: {fileID: 0}
-  preset: {fileID: 11400000, guid: 68eaac97cf476974cbe16ef0ad132a67, type: 2}
+  preset: {fileID: 11400000, guid: 2837feba1434b204095232879f6adfe8, type: 2}
   idleSpriteRenderer: {fileID: 1245352396748298203}
   attackSpriteRenderer: {fileID: 767715307944106709}
   jumpSpriteRenderer: {fileID: 2812064139447649281}
