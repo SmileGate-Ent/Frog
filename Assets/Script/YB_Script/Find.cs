@@ -5,10 +5,9 @@ using UnityEngine.AI;
 
 public class Find : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform moveTarget;
 
     private NavMeshAgent _agent;
-    // Start is called before the first frame update
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -19,6 +18,6 @@ public class Find : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _agent.SetDestination(target.position);
+        _agent.SetDestination(moveTarget.position);
     }
 }
