@@ -71281,7 +71281,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemParent: {fileID: 1308331075}
-  itemPrefab: {fileID: 7633572977494116190, guid: 9ca84d0d9d292d049a782eb20c6c87ac, type: 3}
+  itemPrefabList:
+  - {fileID: 660185581643088783, guid: 9ca84d0d9d292d049a782eb20c6c87ac, type: 3}
+  - {fileID: 660185581643088783, guid: 750efa6db2a59b446a93268e8d0e002e, type: 3}
+  - {fileID: 660185581643088783, guid: ce2adc5839725ae4dacf2f12abb9406d, type: 3}
+  - {fileID: 660185581643088783, guid: e256ec68e67d843419eb2b86a9b4581f, type: 3}
+  - {fileID: 660185581643088783, guid: 2cb008dcdbb80ca4a8ffb372a75d9c9b, type: 3}
+  - {fileID: 660185581643088783, guid: ad4c0e87b915c5a428f452533f802082, type: 3}
 --- !u!1001 &1314443130
 PrefabInstance:
   m_ObjectHideFlags: 0
