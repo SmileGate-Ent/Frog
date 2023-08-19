@@ -33,7 +33,6 @@ public class Frog : MonoBehaviour
 
     [SerializeField] Transform frogSpritePivot;
 
-    [SerializeField] Transform frogSprite;  
 
     [SerializeField] float jumpMoveRatioInCurve = 0.9f;
     [SerializeField] Transform shadowPivot;
