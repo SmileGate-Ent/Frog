@@ -24,6 +24,8 @@ public class Frog : MonoBehaviour
     [SerializeField] int hp;
     [SerializeField] int score;
 
+    [SerializeField] AnimationCurve jumpHeightCurve;
+
     public int Hp
     {
         get => hp;
@@ -79,9 +81,10 @@ public class Frog : MonoBehaviour
             //Instantiate(tongueTargetPrefab, worldPoint, Quaternion.identity);
         }
         
-        var tongueLocalScale = tongue.transform.localScale;
+        var tongueLocalScale = tongue.size; //.transform.localScale;
         tongueLocalScale.x = Mathf.SmoothDamp(tongueLocalScale.x, tongueTargetLength, ref tongueVelocity, tongueSmoothTime);
-        tongue.transform.localScale = tongueLocalScale;
+        //tongue.transform.localScale = tongueLocalScale;
+        tongue.size = tongueLocalScale;
 
         var tongueLocalPos = tonguePos.localPosition;
         tongueLocalPos.z = tongueLocalScale.x;
