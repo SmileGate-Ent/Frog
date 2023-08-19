@@ -4,6 +4,13 @@ public class Item : MonoBehaviour
 {
     [SerializeField] LayerMask tongueLayer;
     [SerializeField] LayerMask frogBodyLayer;
+    [SerializeField] Sprite[] spriteList;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    
+    void Awake()
+    {
+        spriteRenderer.sprite = spriteList[Random.Range(0, spriteList.Length)];
+    }
 
     void OnTriggerEnter2D(Collider2D col)
     {
