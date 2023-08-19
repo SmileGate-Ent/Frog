@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
-public class Find : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     [SerializeField] private Vector2 moveTarget;
     [SerializeField] private Vector2 movePosition;
     [SerializeField] private LayerMask moveLayer;
     [SerializeField] SpriteRenderer spriteRenderer;
+    
+    [SerializeField] LayerMask tongueLayer;
+    [SerializeField] LayerMask frogBodyLayer;
 
     private NavMeshAgent _agent;
     void Start()
@@ -36,5 +40,30 @@ public class Find : MonoBehaviour
         }
 
         spriteRenderer.flipX = _agent.desiredVelocity.x > 0;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if ((tongueLayer.value & (1 << col.gameObject.layer)) != 0)
+        {
+            //if (Frog.Instance.CanCatch)
+            {
+                Frog.Instance.AttachItemToTongue(this);
+            }
+        }
+        else if ((frogBodyLayer.value & (1 << col.gameObject.layer)) != 0)
+        {
+            //if (Frog.Instance.IsAttachedToTongue(this))
+            {
+                Frog.Instance.Score++;
+                Frog.Instance.Hp += 5;
+                Frog.Instance.PlayScoreClip();
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            Debug.LogError("Unknown collision layer");
+        }
     }
 }
