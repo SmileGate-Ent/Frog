@@ -223,7 +223,7 @@ MonoBehaviour:
   frogBodyLayer:
     serializedVersion: 2
     m_Bits: 64
-  deltaHp: 5
+  deltaHp: 3
   deltaScore: 5
   preset: {fileID: 11400000, guid: 6c9948116cb509b4cb460ddc26c79ef6, type: 2}
 --- !u!50 &6821484152093842742

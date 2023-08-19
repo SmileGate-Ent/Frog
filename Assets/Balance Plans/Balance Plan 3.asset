@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b332805489cc7344972a01395e2cdff, type: 3}
   m_Name: Balance Plan 3
   m_EditorClassIdentifier: 
-  applyTime: 10
+  applyTime: 90
   spawnItemList:
-  - {fileID: 660185581643088783, guid: 9ca84d0d9d292d049a782eb20c6c87ac, type: 3}
   - {fileID: 660185581643088783, guid: 750efa6db2a59b446a93268e8d0e002e, type: 3}
-  - {fileID: 660185581643088783, guid: ce2adc5839725ae4dacf2f12abb9406d, type: 3}
   - {fileID: 660185581643088783, guid: e256ec68e67d843419eb2b86a9b4581f, type: 3}
   - {fileID: 660185581643088783, guid: 2cb008dcdbb80ca4a8ffb372a75d9c9b, type: 3}
   - {fileID: 660185581643088783, guid: ad4c0e87b915c5a428f452533f802082, type: 3}
@@ -26,7 +24,9 @@ MonoBehaviour:
   - {fileID: 660185581643088783, guid: daac994bb839e1e4ea10e5fcfb57986f, type: 3}
   - {fileID: 660185581643088783, guid: c89d43cbf20b98641bff46d264abd940, type: 3}
   - {fileID: 660185581643088783, guid: 8eb908a2cda83ee42a2c86cad38b3720, type: 3}
-  spawnItemInterval: 1
-  damageOverTime: 4
-  damageOverTimeInterval: 3
+  - {fileID: 660185581643088783, guid: ce2adc5839725ae4dacf2f12abb9406d, type: 3}
+  - {fileID: 660185581643088783, guid: 9ca84d0d9d292d049a782eb20c6c87ac, type: 3}
+  spawnItemInterval: 0.8
+  damageOverTime: 3
+  damageOverTimeInterval: 1
   enemySpawnInterval: 3

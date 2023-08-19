@@ -223,7 +223,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   deltaHp: -5
-  deltaScore: 0
+  deltaScore: 20
   preset: {fileID: 0}
 --- !u!50 &6821484152093842742
 Rigidbody2D:
