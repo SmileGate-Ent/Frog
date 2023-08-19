@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Frog : MonoBehaviour
@@ -152,5 +153,10 @@ public class Frog : MonoBehaviour
     public void PlayScoreClip()
     {
         sfxAudioSource.PlayOneShot(scoreClip);
+    }
+
+    public void AttachItemToTongue(Item item)
+    {
+        item.transform.SetParent(tongueTip);
     }
 }
