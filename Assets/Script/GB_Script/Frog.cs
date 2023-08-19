@@ -40,6 +40,7 @@ public class Frog : MonoBehaviour
 
     [SerializeField] float jumpMoveRatioInCurve = 0.9f;
     [SerializeField] Transform shadowPivot;
+    [SerializeField] Transform shadow;
 
     [SerializeField] AudioSource sfxAudioSource;
     [SerializeField] AudioClip jumpClip;
@@ -174,10 +175,10 @@ public class Frog : MonoBehaviour
             jumpCurrentDuration += Time.deltaTime;
             if (jumpCurrentDuration >= jumpTotalDuration)
             {
-                if (!Physics2D.OverlapCircle(transform.position, 2, layers))
+                if (!Physics2D.OverlapCircle(shadow.position, 0.25f, layers))
                 {
                     Debug.Log("Instantiate dieWater");
-                    var a = Instantiate(dieWater, transform.position, quaternion.identity);
+                    var a = Instantiate(dieWater, shadow.position, quaternion.identity);
                     Destroy(a, 1f);
                     Die();
                 }

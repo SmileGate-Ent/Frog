@@ -1019,6 +1019,7 @@ MonoBehaviour:
   frogSpritePivot: {fileID: 532117007109192206}
   jumpMoveRatioInCurve: 0.9
   shadowPivot: {fileID: 4142103416329620408}
+  shadow: {fileID: 6576364359974335801}
   sfxAudioSource: {fileID: 179463846528027945}
   jumpClip: {fileID: 8300000, guid: 246b142b55f1b9945a589748e623e837, type: 3}
   tongueClip: {fileID: 8300000, guid: c6088f34c77e3f34196946c57a5aed87, type: 3}
