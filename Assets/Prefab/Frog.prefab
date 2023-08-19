@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 14837f5f688a12d4c8e3c1edc977c747, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -208,8 +208,8 @@ Transform:
   m_GameObject: {fileID: 5410291679904095871}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.5, y: 0.25, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2350414451718894963}
@@ -279,7 +279,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -397,7 +397,7 @@ Transform:
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 10625812325172568}
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
@@ -640,6 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  tongueTargetPrefab: {fileID: 8461668348430281943, guid: 1e5674e7885e9274281cd20ba6bc5ffb, type: 3}
   cam: {fileID: 7812229505555473911}
   tongue: {fileID: 1848718854129895392}
   tonguePivot: {fileID: 10625812325172568}
@@ -692,13 +693,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   jumpTotalDuration: 0.5
   jumpHeight: 2
-  frogSprite: {fileID: 532117007109192206}
+  frogSpritePivot: {fileID: 532117007109192206}
   jumpMoveRatioInCurve: 0.9
   shadowPivot: {fileID: 4142103416329620408}
   sfxAudioSource: {fileID: 179463846528027945}
   jumpClip: {fileID: 8300000, guid: 246b142b55f1b9945a589748e623e837, type: 3}
   tongueClip: {fileID: 8300000, guid: c6088f34c77e3f34196946c57a5aed87, type: 3}
   scoreClip: {fileID: 8300000, guid: 9a5daa9dd312f714680fe31c053996cc, type: 3}
+  frogSprite: {fileID: 1245352396748298203}
 --- !u!50 &4364672906974703244
 Rigidbody2D:
   serializedVersion: 4
