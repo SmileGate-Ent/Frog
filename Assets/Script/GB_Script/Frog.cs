@@ -55,6 +55,9 @@ public class Frog : MonoBehaviour
     [SerializeField] private AnimationCurve hpCurve;
     [SerializeField] private int hpTime;
     [SerializeField] private Slider hpSlider;
+    
+    
+    [SerializeField] private Slider debuffSlider;
 
     [SerializeField] CharacterPreset preset;
 
@@ -133,6 +136,8 @@ public class Frog : MonoBehaviour
     
     void Update()
     {
+        debuffSlider.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, -1.5f, 0));
+        
         var dx = Input.GetAxisRaw("Horizontal");
         var dy = Input.GetAxisRaw("Vertical");
         if ((dx != 0 || dy != 0) && isJump == false)
