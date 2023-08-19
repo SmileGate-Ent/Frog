@@ -4,6 +4,7 @@ public class Item : MonoBehaviour
 {
     [SerializeField] LayerMask tongueLayer;
     [SerializeField] LayerMask frogBodyLayer;
+    /*
     [SerializeField] Sprite[] spriteList;
     [SerializeField] SpriteRenderer spriteRenderer;
     
@@ -11,6 +12,7 @@ public class Item : MonoBehaviour
     {
         spriteRenderer.sprite = spriteList[Random.Range(0, spriteList.Length)];
     }
+    */
 
     void OnTriggerEnter2D(Collider2D col)
     {
