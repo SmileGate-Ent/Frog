@@ -964,6 +964,7 @@ MonoBehaviour:
   moveSpeed: 10
   tongueTargetPrefab: {fileID: 8461668348430281943, guid: 1e5674e7885e9274281cd20ba6bc5ffb, type: 3}
   cam: {fileID: 7812229505555473911}
+  uiCam: {fileID: 0}
   tongueScale: 0.33333334
   tongue: {fileID: 1848718854129895392}
   tonguePivot: {fileID: 10625812325172568}
@@ -1042,6 +1043,9 @@ MonoBehaviour:
   attackSpriteRenderer: {fileID: 767715307944106709}
   jumpSpriteRenderer: {fileID: 2812064139447649281}
   gameOverPopup: {fileID: 0}
+  fireTouchLayers:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!50 &4364672906974703244
 Rigidbody2D:
   serializedVersion: 4

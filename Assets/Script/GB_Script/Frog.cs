@@ -4,11 +4,21 @@ using System.Linq;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Frog : MonoBehaviour
 {
+    // 'Application.isMobilePlatform'은 실기기에서만 true라,
+    // 에디터에서 모바일 환경처럼 해보려면 이 값을 쓰자.
+    bool MobileEnv =>
+#if UNITY_ANDROID || UNITY_IOS
+        true;
+#else
+        false;
+#endif
+
     public static Frog Instance;
     [SerializeField] float moveSpeed = 10;
 
@@ -50,7 +60,7 @@ public class Frog : MonoBehaviour
     [SerializeField] AudioClip scoreClip;
     [SerializeField] AudioClip damageClip;
     [SerializeField] AudioClip waterDropClip;
-    
+
     [SerializeField] LayerMask layers;
     [SerializeField] GameObject dieWater;
     [SerializeField] GameObject[] frogpivot;
@@ -60,8 +70,8 @@ public class Frog : MonoBehaviour
     [SerializeField] GameObject frogMouth;
 
     [SerializeField] private Image hpSlider;
-    
-    
+
+
     [SerializeField] private Slider debuffSlider;
 
     [SerializeField] CharacterPreset preset;
@@ -69,8 +79,10 @@ public class Frog : MonoBehaviour
     [SerializeField] SpriteRenderer idleSpriteRenderer;
     [SerializeField] SpriteRenderer attackSpriteRenderer;
     [SerializeField] SpriteRenderer jumpSpriteRenderer;
-    
+
     [SerializeField] GameObject gameOverPopup;
+    
+    [SerializeField] LayerMask fireTouchLayers;
 
     float jumpCurrentDuration;
     bool isJump;
@@ -136,11 +148,14 @@ public class Frog : MonoBehaviour
     {
         AdjustDebuffUiPosition();
 
-        var dx = Input.GetAxisRaw("Horizontal");
-        var dy = Input.GetAxisRaw("Vertical");
-        if ((dx != 0 || dy != 0) && isJump == false)
+        var stickDir = Stick.Instance.NormalizedDirection;
+
+        var dx = Input.GetAxisRaw("Horizontal") + stickDir.x;
+        var dy = Input.GetAxisRaw("Vertical") + stickDir.y;
+
+        if ((Math.Abs(dx) > 0 || Math.Abs(dy) > 0) && isJump == false)
         {
-            moveDeltaDuringJump = new Vector2(dx, dy).normalized;// + Stick.Instance.NormalizedDirection;
+            moveDeltaDuringJump = new Vector2(dx, dy).normalized;
 
             isJump = true;
             jumpCurrentDuration = 0;
@@ -149,7 +164,7 @@ public class Frog : MonoBehaviour
             //frogSprite.sprite = frogJumpSprite;
             spriteState = SpriteState.Jump;
         }
-        
+
         //Debug.Log($"isDie = {isDie}");
 
         if (isJump && !isDie)
@@ -204,46 +219,34 @@ public class Frog : MonoBehaviour
 
         // 점프에 의한 그림자 크기 조절
         shadowPivot.localScale = Vector3.one * (1.0f - jumpHeightCurveVal * 0.3f);
-        
+
         var mousePos = Input.mousePosition;
-        
+
         // 스크린 좌표에서 이러한 월드 좌표를 얻습니다.
-        var worldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
-        worldPoint.z = 0; // 생성하려는 게임 오브젝트의 z축 위치를 조정합니다.
+        var mouseWorldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
+        mouseWorldPoint.z = 0; // 생성하려는 게임 오브젝트의 z축 위치를 조정합니다.
 
         // 개구리 이미지 좌우 뒤집기
         var frogSpritePivotScale = frogSpritePivot.localScale;
 
         // [이동 방향에 따른 것]
-        if (moveDeltaDuringJump.x != 0)
+        if (Math.Abs(moveDeltaDuringJump.x) > 0)
         {
             frogSpritePivotScale.x = moveDeltaDuringJump.x > 0 ? 1 : -1;
-            frogSpritePivotScale.x = transform.position.x < worldPoint.x ? 1 : -1;
             frogSpritePivot.localScale = frogSpritePivotScale;
         }
-        
-        // [마우스 위치에 따른 것]
-        frogSpritePivotScale.x = transform.position.x < worldPoint.x ? 1 : -1;
-        frogSpritePivot.localScale = frogSpritePivotScale;
+
+        if (MobileEnv == false)
+        {
+            // [마우스 위치에 따른 것]
+            frogSpritePivotScale.x = transform.position.x < mouseWorldPoint.x ? 1 : -1;
+            frogSpritePivot.localScale = frogSpritePivotScale;
+        }
 
         // 왼쪽 마우스 버튼이 클릭되었을 때
-        // 점프 중일 때는 공격 시작 못한다. 
-        if (Input.GetMouseButtonDown(0) && JumpNormalizedDuration <= 0 && debuffSlider.value <= 0)
+        if (MobileEnv == false && Input.GetMouseButtonDown(0))
         {
-            tongueTargetPos = worldPoint;
-            if (tongueTargetPos != null)
-            {
-                tongueTargetFirstLength = Vector3.Distance(tonguePivot.position, tongueTargetPos.Value);
-            }
-
-            sfxAudioSource.PlayOneShot(tongueClip);
-
-            // 씬에 프리팹 게임 오브젝트를 클릭한 위치에 생성합니다.
-            Instantiate(tongueTargetPrefab, worldPoint, Quaternion.identity);
-
-            //frogSprite.sprite = frogAttackSprite;
-            //frogMouth.SetActive(true);
-            spriteState = SpriteState.Attack;
+            FireTongue(mouseWorldPoint);
         }
 
         var tongueLocalScale = tongue.size; //.transform.localScale;
@@ -272,7 +275,7 @@ public class Frog : MonoBehaviour
             // 목표하는 혀 길이보다 0.1f보다 조금 짧은 순간이 오면 다시 혀를 말아 들인다.
             if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.15f
                 || tongueLocalScale.x > tongueTargetFirstLength / tongueScale
-               )
+            )
             {
                 tongueTargetLength = 0;
                 tongueTargetPos = null;
@@ -292,35 +295,59 @@ public class Frog : MonoBehaviour
                 {
                     OnEatEnemy(e.DeltaScore);
                 }
+
                 Destroy(c.gameObject);
             }
         }
-        
+
         damageOverTimeDuration += Time.deltaTime;
         if (damageOverTimeDuration >= BalancePlanner.Instance.CurrentPlan.DamageOverTimeInterval)
         {
             damageOverTimeDuration = 0;
             Hp -= BalancePlanner.Instance.CurrentPlan.DamageOverTime;
         }
-        
+
         if (Hp <= 0 && isDie == false)
         {
             Die(false);
         }
-        
+
         // 맨 마지막에 처리해야한다.
-        hpSlider.fillAmount = Hp/100;
-        hpSlider.color = Color.HSVToRGB(0.28f*hpSlider.fillAmount,0.85f,0.85f);
+        hpSlider.fillAmount = Hp / 100;
+        hpSlider.color = Color.HSVToRGB(0.28f * hpSlider.fillAmount, 0.85f, 0.85f);
 
         debuffSlider.value = Mathf.Max(0, debuffSlider.value - Time.deltaTime);
         debuffSlider.gameObject.SetActive(debuffSlider.value > 0);
+    }
+
+    void FireTongue(Vector3 targetWorldPoint)
+    {
+        // 점프 중일 때는 공격 시작 못한다.
+        if (JumpNormalizedDuration <= 0 && debuffSlider.value <= 0)
+        {
+            tongueTargetPos = targetWorldPoint;
+            if (tongueTargetPos != null)
+            {
+                tongueTargetFirstLength = Vector3.Distance(tonguePivot.position, tongueTargetPos.Value);
+            }
+
+            sfxAudioSource.PlayOneShot(tongueClip);
+
+            // 씬에 프리팹 게임 오브젝트를 클릭한 위치에 생성합니다.
+            Instantiate(tongueTargetPrefab, targetWorldPoint, Quaternion.identity);
+
+            //frogSprite.sprite = frogAttackSprite;
+            //frogMouth.SetActive(true);
+            spriteState = SpriteState.Attack;
+        }
     }
 
     private void AdjustDebuffUiPosition()
     {
         var debuffSliderScreenPoint =
             RectTransformUtility.WorldToScreenPoint(cam, transform.position + new Vector3(0, -1.5f, 0));
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(debuffSlider.transform.parent.GetComponent<RectTransform>(),
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            debuffSlider.transform.parent.GetComponent<RectTransform>(),
             debuffSliderScreenPoint, uiCam, out var debuffLocalPos);
         debuffSlider.GetComponent<RectTransform>().anchoredPosition = debuffLocalPos;
     }
@@ -337,18 +364,18 @@ public class Frog : MonoBehaviour
         idleSpriteRenderer.sprite = preset.IdleSprite;
         jumpSpriteRenderer.sprite = preset.JumpSprite;
         attackSpriteRenderer.sprite = preset.AttackSprite;
-        
+
         idleSpriteRenderer.gameObject.SetActive(spriteState == SpriteState.Idle);
         jumpSpriteRenderer.gameObject.SetActive(spriteState == SpriteState.Jump);
         attackSpriteRenderer.gameObject.SetActive(spriteState == SpriteState.Attack);
-        
+
         frogMouth.SetActive(spriteState == SpriteState.Attack);
     }
 
     IEnumerator OpenDelayedGameOverPopup()
     {
         yield return new WaitForSeconds(2);
-        
+
         OpenGameOverPopup();
     }
 
@@ -357,11 +384,12 @@ public class Frog : MonoBehaviour
         if (gameOverPopup != null)
         {
             gameOverPopup.SetActive(true);
-            
+
             GameObject.FindWithTag("Score").GetComponent<TextMeshProUGUI>().text = score.ToString();
             var gameTime = TimeSpan.FromSeconds(BalancePlanner.Instance.GameTime);
-            GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text = $"{gameTime.Minutes:D2}:{gameTime.Seconds:D2}";
-            
+            GameObject.FindWithTag("Time").GetComponent<TextMeshProUGUI>().text =
+                $"{gameTime.Minutes:D2}:{gameTime.Seconds:D2}";
+
             Destroy(GetComponent<Frog>());
         }
     }
@@ -370,7 +398,7 @@ public class Frog : MonoBehaviour
     {
         Hp = 0;
         hpSlider.fillAmount = 0;
-        
+
         if (byWater)
         {
             sfxAudioSource.PlayOneShot(waterDropClip);
@@ -380,7 +408,7 @@ public class Frog : MonoBehaviour
         {
             OpenGameOverPopup();
         }
-        
+
         BalancePlanner.Instance.gameObject.SetActive(false);
 
         frogpivot[0].SetActive(false);
@@ -397,7 +425,7 @@ public class Frog : MonoBehaviour
     {
         item.transform.SetParent(tongueTip);
     }
-    
+
     public void AttachItemToTongue(Enemy enemy)
     {
         enemy.transform.SetParent(tongueTip);
@@ -407,7 +435,7 @@ public class Frog : MonoBehaviour
     {
         return item.transform.parent == tongueTip;
     }
-    
+
     public bool IsAttachedToTongue(Enemy enemy)
     {
         return enemy.transform.parent == tongueTip;
@@ -422,5 +450,16 @@ public class Frog : MonoBehaviour
     {
         Score += deltaScore;
         StartDebuff();
+    }
+
+    public void OnFireAreaTouch(PointerEventData eventData)
+    {
+        var ray = RectTransformUtility.ScreenPointToRay(cam, eventData.position);
+        var hit = Physics2D.Raycast(ray.origin, ray.direction, 1000.0f, fireTouchLayers);
+        Debug.Log(hit);
+        if (hit.collider != null)
+        {
+            FireTongue(hit.point);
+        }
     }
 }
