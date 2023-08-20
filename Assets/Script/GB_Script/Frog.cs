@@ -15,6 +15,7 @@ public class Frog : MonoBehaviour
     [SerializeField] GameObject tongueTargetPrefab; // 생성할 게임 오브젝트 프리팹입니다.
 
     [SerializeField] Camera cam;
+    [SerializeField] Camera uiCam;
 
     [SerializeField] float tongueScale = 1.0f / 3;
 
@@ -133,8 +134,8 @@ public class Frog : MonoBehaviour
 
     void Update()
     {
-        debuffSlider.transform.position = cam.WorldToScreenPoint(transform.position + new Vector3(0, -1.5f, 0));
-        
+        AdjustDebuffUiPosition();
+
         var dx = Input.GetAxisRaw("Horizontal");
         var dy = Input.GetAxisRaw("Vertical");
         if ((dx != 0 || dy != 0) && isJump == false)
@@ -313,6 +314,15 @@ public class Frog : MonoBehaviour
 
         debuffSlider.value = Mathf.Max(0, debuffSlider.value - Time.deltaTime);
         debuffSlider.gameObject.SetActive(debuffSlider.value > 0);
+    }
+
+    private void AdjustDebuffUiPosition()
+    {
+        var debuffSliderScreenPoint =
+            RectTransformUtility.WorldToScreenPoint(cam, transform.position + new Vector3(0, -1.5f, 0));
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(debuffSlider.transform.parent.GetComponent<RectTransform>(),
+            debuffSliderScreenPoint, uiCam, out var debuffLocalPos);
+        debuffSlider.GetComponent<RectTransform>().anchoredPosition = debuffLocalPos;
     }
 
     public void StartDebuff()
