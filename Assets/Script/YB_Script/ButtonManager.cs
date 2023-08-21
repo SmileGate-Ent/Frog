@@ -7,7 +7,7 @@ public class ButtonManager : MonoBehaviour
 {
     [SerializeField] private GameObject credit;
     [SerializeField] private GameObject setting;
-
+    public GameObject tuto;
     public void StartButton()
     {
         AudioManager.Instance.PlayBtnClick();
@@ -24,6 +24,10 @@ public class ButtonManager : MonoBehaviour
     {
         AudioManager.Instance.PlayBtnClick();
         credit.SetActive(true);
+    }
+    public void TutoButton()
+    {
+        tuto.SetActive(true);
     }
 
     public void ExitButton()
