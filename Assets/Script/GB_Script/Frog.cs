@@ -196,19 +196,9 @@ public class Frog : MonoBehaviour
             }
         }
 
-        if (isExitPopup == false && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isExitPopup = true;
-            var popup = FrogCanvas.Instance.InstantiateConfirmPopup();
-            popup.Text = "종료하시겠습니까?";
-            popup.Btn1Text = "예";
-            popup.Btn2Text = "아니요";
-            popup.OnBtn1 = () => SceneManager.LoadScene("TitleScene");
-            popup.OnBtn2 = () =>
-            {
-                isExitPopup = false;
-                Destroy(popup.gameObject);
-            };
+            TryOpenExitPopup();
         }
 
         // 점프에 의한 개구리 스프라이트 위치 조절
@@ -318,6 +308,26 @@ public class Frog : MonoBehaviour
 
         debuffSlider.value = Mathf.Max(0, debuffSlider.value - Time.deltaTime);
         debuffSlider.gameObject.SetActive(debuffSlider.value > 0);
+    }
+
+    public void TryOpenExitPopup()
+    {
+        if (isExitPopup)
+        {
+            return;
+        }
+        
+        isExitPopup = true;
+        var popup = FrogCanvas.Instance.InstantiateConfirmPopup();
+        popup.Text = "종료하시겠습니까?";
+        popup.Btn1Text = "예";
+        popup.Btn2Text = "아니요";
+        popup.OnBtn1 = () => SceneManager.LoadScene("TitleScene");
+        popup.OnBtn2 = () =>
+        {
+            isExitPopup = false;
+            Destroy(popup.gameObject);
+        };
     }
 
     void FireTongue(Vector3 targetWorldPoint)
