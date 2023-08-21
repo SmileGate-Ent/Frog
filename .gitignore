@@ -156,3 +156,4 @@ sysinfo.txt
 /build*.zip
 /.idea/
 /build*/
+**/.DS_Store
