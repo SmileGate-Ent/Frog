@@ -4,7 +4,6 @@ using UnityEngine.Events;
 
 public class ConfirmPopup : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI text;
     [SerializeField] TextMeshProUGUI btn1Text;
     [SerializeField] TextMeshProUGUI btn2Text;
 
@@ -19,11 +18,6 @@ public class ConfirmPopup : MonoBehaviour
     public UnityAction OnBtn2
     {
         set => onBtn2 = value;
-    }
-
-    public string Text
-    {
-        set => text.text = value;
     }
 
     public string Btn1Text
