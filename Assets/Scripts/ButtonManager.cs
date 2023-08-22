@@ -64,4 +64,14 @@ public class ButtonManager : MonoBehaviour
     {
         credit.SetActive(false);
     }
+    
+    public void OpenAchievements()
+    {
+        Social.ShowAchievementsUI();
+    }
+
+    public void OpenLeaderboards()
+    {
+        Social.ShowLeaderboardUI();
+    }
 }

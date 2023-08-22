@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Linq;
+using GooglePlayGames;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class Frog : MonoBehaviour
 {
@@ -81,7 +84,7 @@ public class Frog : MonoBehaviour
     [SerializeField] SpriteRenderer jumpSpriteRenderer;
 
     [SerializeField] GameObject gameOverPopup;
-    
+
     [SerializeField] LayerMask fireTouchLayers;
 
     [SerializeField] GameObject closeButton;
@@ -138,6 +141,13 @@ public class Frog : MonoBehaviour
         spriteState = SpriteState.Idle;
     }
 
+    void Start()
+    {
+        // 첫 게임 시작 업적
+        Social.ReportProgress(GPGSIds.achievement, 100.0f, _ => { });
+    }
+
+    [Conditional("UNITY_EDITOR")]
     void OnDrawGizmos()
     {
         if (tongueTargetPos != null)
@@ -267,7 +277,7 @@ public class Frog : MonoBehaviour
             // 목표하는 혀 길이보다 0.1f보다 조금 짧은 순간이 오면 다시 혀를 말아 들인다.
             if (Vector3.Distance(tongueTip.position, tongueTargetPos.Value) < 0.15f
                 || tongueLocalScale.x > tongueTargetFirstLength / tongueScale
-            )
+               )
             {
                 tongueTargetLength = 0;
                 tongueTargetPos = null;
@@ -318,7 +328,7 @@ public class Frog : MonoBehaviour
         {
             return;
         }
-        
+
         isExitPopup = true;
         var popup = FrogCanvas.Instance.InstantiateExitPopup();
         popup.OnBtn1 = () => SceneManager.LoadScene("TitleScene");
@@ -400,13 +410,24 @@ public class Frog : MonoBehaviour
                 $"{gameTime.Minutes:D2}:{gameTime.Seconds:D2}";
 
             Destroy(GetComponent<Frog>());
-            
+
             closeButton.SetActive(false);
         }
     }
 
     private void Die(bool byWater)
     {
+        // 첫 죽음 업적
+        Social.ReportProgress(GPGSIds.achievement_2, 100.0f, _ => { });
+
+        // 생존 시간 리더보드
+        var duration = (long)(BalancePlanner.Instance.GameTime *
+                              (Application.platform == RuntimePlatform.Android ? 1000 : 1));
+        Social.ReportScore(duration, GPGSIds.leaderboard, _ => { });
+
+        // 점수 리더보드
+        Social.ReportScore(Score, GPGSIds.leaderboard_2, _ => { });
+
         Hp = 0;
         hpSlider.fillAmount = 0;
 
@@ -424,7 +445,7 @@ public class Frog : MonoBehaviour
 
         frogpivot[0].SetActive(false);
         frogpivot[1].SetActive(false);
-        
+
         isDie = true;
     }
 
