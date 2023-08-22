@@ -84,6 +84,8 @@ public class Frog : MonoBehaviour
     
     [SerializeField] LayerMask fireTouchLayers;
 
+    [SerializeField] GameObject closeButton;
+
     float jumpCurrentDuration;
     bool isJump;
     bool isDie;
@@ -398,6 +400,8 @@ public class Frog : MonoBehaviour
                 $"{gameTime.Minutes:D2}:{gameTime.Seconds:D2}";
 
             Destroy(GetComponent<Frog>());
+            
+            closeButton.SetActive(false);
         }
     }
 
@@ -420,6 +424,7 @@ public class Frog : MonoBehaviour
 
         frogpivot[0].SetActive(false);
         frogpivot[1].SetActive(false);
+        
         isDie = true;
     }
 
