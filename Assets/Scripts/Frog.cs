@@ -143,8 +143,11 @@ public class Frog : MonoBehaviour
 
     void Start()
     {
-        // 첫 게임 시작 업적
-        Social.ReportProgress(GPGSIds.achievement, 100.0f, _ => { });
+        if (Social.localUser.authenticated)
+        {
+            // 첫 게임 시작 업적
+            Social.ReportProgress(GPGSIds.achievement, 100.0f, _ => { });
+        }
     }
 
     [Conditional("UNITY_EDITOR")]
@@ -417,16 +420,19 @@ public class Frog : MonoBehaviour
 
     private void Die(bool byWater)
     {
-        // 첫 죽음 업적
-        Social.ReportProgress(GPGSIds.achievement_2, 100.0f, _ => { });
+        if (Social.localUser.authenticated)
+        {
+            // 첫 죽음 업적
+            Social.ReportProgress(GPGSIds.achievement_2, 100.0f, _ => { });
 
-        // 생존 시간 리더보드
-        var duration = (long)(BalancePlanner.Instance.GameTime *
-                              (Application.platform == RuntimePlatform.Android ? 1000 : 1));
-        Social.ReportScore(duration, GPGSIds.leaderboard, _ => { });
+            // 생존 시간 리더보드
+            var duration = (long)(BalancePlanner.Instance.GameTime *
+                                  (Application.platform == RuntimePlatform.Android ? 1000 : 1));
+            Social.ReportScore(duration, GPGSIds.leaderboard, _ => { });
 
-        // 점수 리더보드
-        Social.ReportScore(Score, GPGSIds.leaderboard_2, _ => { });
+            // 점수 리더보드
+            Social.ReportScore(Score, GPGSIds.leaderboard_2, _ => { });
+        }
 
         Hp = 0;
         hpSlider.fillAmount = 0;
