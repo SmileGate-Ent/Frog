@@ -318,10 +318,7 @@ public class Frog : MonoBehaviour
         }
         
         isExitPopup = true;
-        var popup = FrogCanvas.Instance.InstantiateConfirmPopup();
-        popup.Text = "종료하시겠습니까?";
-        popup.Btn1Text = "예";
-        popup.Btn2Text = "아니요";
+        var popup = FrogCanvas.Instance.InstantiateExitPopup();
         popup.OnBtn1 = () => SceneManager.LoadScene("TitleScene");
         popup.OnBtn2 = () =>
         {

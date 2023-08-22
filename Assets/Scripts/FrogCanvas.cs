@@ -8,6 +8,9 @@ public class FrogCanvas : MonoBehaviour
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] ConfirmPopup confirmPopupPrefab;
+    [SerializeField] Sprite exitBgSprite;
+    [SerializeField] Sprite btn1Sprite;
+    [SerializeField] Sprite btn2Sprite;
 
     public string HpText
     {
@@ -24,8 +27,17 @@ public class FrogCanvas : MonoBehaviour
         Instance = this;
     }
 
-    public ConfirmPopup InstantiateConfirmPopup()
+    public ConfirmPopup InstantiateTextConfirmPopup()
     {
         return Instantiate(confirmPopupPrefab, transform);
+    }
+
+    public ConfirmPopup InstantiateExitPopup()
+    {
+        var popup = Instantiate(confirmPopupPrefab, transform);
+        popup.BgSprite = exitBgSprite;
+        popup.Btn1Sprite = btn1Sprite;
+        popup.Btn2Sprite = btn2Sprite;
+        return popup;
     }
 }

@@ -32,10 +32,7 @@ public class ButtonManager : MonoBehaviour
 
     public void ExitButton()
     {
-        var popup = FrogCanvas.Instance.InstantiateConfirmPopup();
-        popup.Text = "정말 떠나실 거예요? ㅜ.ㅠ";
-        popup.Btn1Text = "예";
-        popup.Btn2Text = "아니요";
+        var popup = FrogCanvas.Instance.InstantiateExitPopup();
         popup.OnBtn1 = () =>
         {
             AudioManager.Instance.PlayBtnClick();
