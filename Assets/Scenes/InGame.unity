@@ -47606,7 +47606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpText: {fileID: 1435597438}
   scoreText: {fileID: 1592447968}
-  confirmPopupPrefab: {fileID: 3256025142484509400, guid: 9854317149a014945b5d947ae59ee03c, type: 3}
+  confirmPopupPrefab: {fileID: 6796381434026053559, guid: 9854317149a014945b5d947ae59ee03c, type: 3}
   exitBgSprite: {fileID: 21300000, guid: 297826187f3ce4f29b4012c018f2faff, type: 3}
   btn1Sprite: {fileID: 21300000, guid: 2b389466958414c20b2c81d6eeb3cf5b, type: 3}
   btn2Sprite: {fileID: 21300000, guid: 78df908ec1f80420aa9b2610ea0ea7b0, type: 3}
