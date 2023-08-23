@@ -157,4 +157,5 @@ sysinfo.txt
 /.idea/
 /build*/
 **/.DS_Store
-/Screenshot.png
+/Screenshot*.png
+
