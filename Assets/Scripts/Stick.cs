@@ -1,14 +1,13 @@
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Stick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class Stick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IDragHandler,
+    IEndDragHandler
 {
     [SerializeField] Camera cam;
     [SerializeField] RectTransform rt;
     [SerializeField] RectTransform parentRt;
     Vector2 dragBeginPos;
-    bool dragging;
     Vector2 startPos;
 
     void Awake()
@@ -25,7 +24,6 @@ public class Stick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeg
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRt, eventData.position, cam,
                 out var localPoint))
         {
-            dragging = true;
             dragBeginPos = localPoint;
             startPos = rt.anchoredPosition;
         }

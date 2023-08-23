@@ -497,7 +497,7 @@ public class Frog : MonoBehaviour
     {
         var ray = RectTransformUtility.ScreenPointToRay(cam, eventData.position);
         var hit = Physics2D.Raycast(ray.origin, ray.direction, 1000.0f, fireTouchLayers);
-        Debug.Log(hit);
+        //Debug.Log(hit);
         if (hit.collider != null)
         {
             FireTongue(hit.point);
