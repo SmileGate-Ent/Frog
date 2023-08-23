@@ -47032,7 +47032,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1257255575}
+    m_TransformParent: {fileID: 1683379586}
     m_Modifications:
     - target: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
       propertyPath: m_Pivot.x
@@ -47040,7 +47040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
       propertyPath: m_AnchorMax.x
@@ -47124,10 +47124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 1683379586}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
 --- !u!224 &437005547 stripped
@@ -48277,7 +48274,7 @@ RectTransform:
   - {fileID: 1949364514}
   - {fileID: 244772979}
   - {fileID: 775543815}
-  - {fileID: 437005547}
+  - {fileID: 1683379586}
   - {fileID: 361405835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50206,13 +50203,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 437005547}
+  m_Children:
+  - {fileID: 437005547}
+  m_Father: {fileID: 1257255575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10000, y: 10000}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1683379587
 MonoBehaviour:
@@ -50227,7 +50225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
