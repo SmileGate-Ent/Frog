@@ -1,7 +1,9 @@
 using System.Collections;
-using GooglePlayGames;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+#if UNITY_ANDROID
+using GooglePlayGames;
+#endif
 
 public class LogoScene : MonoBehaviour
 {

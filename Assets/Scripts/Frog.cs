@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Linq;
-using GooglePlayGames;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,6 +9,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+#if UNITY_ANDROID
+using GooglePlayGames;
+#endif
 
 public class Frog : MonoBehaviour
 {
