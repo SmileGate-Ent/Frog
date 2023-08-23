@@ -117,6 +117,8 @@ public class Frog : MonoBehaviour
 
     public bool IsTongueExtended => tongueTargetLength > 0;
 
+    bool EnableSocial => Social.localUser.authenticated && Application.isMobilePlatform;
+
     public float Hp
     {
         get => hp;
@@ -143,7 +145,7 @@ public class Frog : MonoBehaviour
 
     void Start()
     {
-        if (Social.localUser.authenticated)
+        if (EnableSocial)
         {
             // 첫 게임 시작 업적
             Social.ReportProgress(GPGSIds.achievement, 100.0f, _ => { });
@@ -420,7 +422,7 @@ public class Frog : MonoBehaviour
 
     private void Die(bool byWater)
     {
-        if (Social.localUser.authenticated)
+        if (EnableSocial)
         {
             // 첫 죽음 업적
             Social.ReportProgress(GPGSIds.achievement_2, 100.0f, _ => { });
