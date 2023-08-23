@@ -11,6 +11,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject rightButton;
     
     [SerializeField] private int nowPage;
+    [SerializeField] Image image;
     
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class Tutorial : MonoBehaviour
         if(nowPage == 0) leftButton.SetActive(false);
         rightButton.SetActive(true);
 
-        GetComponent<Image>().sprite = tutorialSprite[nowPage]; 
+        image.sprite = tutorialSprite[nowPage]; 
     }
     public void Close()
     {
@@ -42,6 +43,6 @@ public class Tutorial : MonoBehaviour
         if(nowPage == tutorialSprite.Length-1) rightButton.SetActive(false);
         leftButton.SetActive(true);
 
-        GetComponent<Image>().sprite = tutorialSprite[nowPage];
+        image.sprite = tutorialSprite[nowPage];
     }
 }
