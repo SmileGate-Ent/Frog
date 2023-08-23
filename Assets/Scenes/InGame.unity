@@ -47044,11 +47044,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
       propertyPath: m_AnchorMin.x
@@ -47060,7 +47060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -420.83716
       objectReference: {fileID: 0}
     - target: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
       propertyPath: m_SizeDelta.y
@@ -47130,11 +47130,6 @@ PrefabInstance:
 --- !u!224 &437005547 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 968996606332252013, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
-  m_PrefabInstance: {fileID: 437005546}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &437005548 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2132617787527962866, guid: 1c379bed04a3ce14b8f131840f20c923, type: 3}
   m_PrefabInstance: {fileID: 437005546}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &446088285
@@ -48731,7 +48726,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 437005548}
+      - m_Target: {fileID: 1683379585}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -50191,7 +50186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1683379586
 RectTransform:
   m_ObjectHideFlags: 0
