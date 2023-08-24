@@ -15,8 +15,10 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] float damage = 30;
     [SerializeField] int deltaScore = 20;
+    [SerializeField] float debuffDuration = 5;
 
     public int DeltaScore => deltaScore;
+    public float DebuffDuration => debuffDuration;
 
     private NavMeshAgent _agent;
     void Start()
@@ -63,7 +65,7 @@ public class Enemy : MonoBehaviour
             
             if (Frog.Instance.IsAttachedToTongue(this))
             {
-                Frog.Instance.OnEatEnemy(DeltaScore);
+                Frog.Instance.OnEatEnemy(DeltaScore, DebuffDuration);
                 Destroy(gameObject);
             }
             else

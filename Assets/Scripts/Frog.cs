@@ -302,7 +302,7 @@ public class Frog : MonoBehaviour
                 // 혹시 먹은 게 적이면 디버프 시작
                 if (c != null && c.GetComponent<Enemy>() is var e && e != null)
                 {
-                    OnEatEnemy(e.DeltaScore);
+                    OnEatEnemy(e.DeltaScore, e.DebuffDuration);
                 }
 
                 Destroy(c.gameObject);
@@ -378,9 +378,9 @@ public class Frog : MonoBehaviour
         debuffSlider.GetComponent<RectTransform>().anchoredPosition = debuffLocalPos;
     }
 
-    public void StartDebuff()
+    void StartDebuff(float debuffDuration)
     {
-        debuffSlider.maxValue = 5;
+        debuffSlider.maxValue = debuffDuration;
         debuffSlider.value = debuffSlider.maxValue;
         debuffSlider.gameObject.SetActive(true);
     }
@@ -489,10 +489,10 @@ public class Frog : MonoBehaviour
         sfxAudioSource.PlayOneShot(damageClip);
     }
 
-    public void OnEatEnemy(int deltaScore)
+    public void OnEatEnemy(int deltaScore, float debuffDuration)
     {
         Score += deltaScore;
-        StartDebuff();
+        StartDebuff(debuffDuration);
     }
 
     public void OnFireAreaTouch(PointerEventData eventData)

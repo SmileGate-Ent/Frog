@@ -543,6 +543,7 @@ MonoBehaviour:
     m_Bits: 512
   damage: 30
   deltaScore: 20
+  debuffDuration: 5
 --- !u!195 &4459950313391013026
 NavMeshAgent:
   m_ObjectHideFlags: 0
