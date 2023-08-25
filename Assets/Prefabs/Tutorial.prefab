@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: be7bd96526a14f7438131d64d62b4537, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e75e115a10d9dee49a036a22a84be603, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.69803923}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -183,14 +183,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialSprite:
-  - {fileID: 21300000, guid: be7bd96526a14f7438131d64d62b4537, type: 3}
-  - {fileID: 21300000, guid: a9c072eae37dd964e843c72a7756dbbc, type: 3}
-  - {fileID: 21300000, guid: 30a7098e6a9e0af4ab94365f42301270, type: 3}
-  - {fileID: 21300000, guid: ba888454409bf1840ab62782702d18ab, type: 3}
-  - {fileID: 21300000, guid: 927c3c1e771acf944ba226e8242ffb88, type: 3}
-  - {fileID: 21300000, guid: 9bbb864f96198614c814a49abaa9eb36, type: 3}
-  - {fileID: 21300000, guid: bbd0c40dcc1277f469fe948a4e29de94, type: 3}
-  - {fileID: 21300000, guid: 82f0bcdf19f9bcf4cb655f06f13d4b96, type: 3}
+  - {fileID: 21300000, guid: e75e115a10d9dee49a036a22a84be603, type: 3}
+  - {fileID: 21300000, guid: 55a50a0df2cecaa409c9e789b47a7fd8, type: 3}
+  - {fileID: 21300000, guid: 1d083b19937dfdb428ef29b108fd9178, type: 3}
+  - {fileID: 21300000, guid: 5289126ba15af1c4e846a9ef9f777246, type: 3}
+  - {fileID: 21300000, guid: 571d06d8212f57148803b36af7f76205, type: 3}
+  - {fileID: 21300000, guid: 593190df5b41b6b4f907b0f95ef0efce, type: 3}
+  - {fileID: 21300000, guid: 8c9c5461b69890d49b364630f91aa750, type: 3}
+  - {fileID: 21300000, guid: f3b72dbcd951bb14393b656aee34cebd, type: 3}
+  - {fileID: 21300000, guid: a87dcf1be8d9b6a4fa4c490146a7dc61, type: 3}
+  - {fileID: 21300000, guid: f6d21adccb64c3743b7b53d28ca70843, type: 3}
   leftButton: {fileID: 3101973376017918288}
   rightButton: {fileID: 4147475638175244335}
   nowPage: 0
