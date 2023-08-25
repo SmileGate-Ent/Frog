@@ -5,7 +5,7 @@ public class Item : MonoBehaviour
     [SerializeField] LayerMask tongueLayer;
     [SerializeField] LayerMask frogBodyLayer;
     [SerializeField] LayerMask groundLayer;
-
+    [SerializeField] LayerMask waterLayer;
 
     // 먹었을 때 채워지는 HP양
     [SerializeField] int deltaHp = 5;
@@ -60,6 +60,10 @@ public class Item : MonoBehaviour
             }
         }
         else if ((groundLayer.value & (1 << col.gameObject.layer)) != 0)
+        {
+            // 아무것도 하지 않는다.
+        }
+        else if ((waterLayer.value & (1 << col.gameObject.layer)) != 0)
         {
             // 아무것도 하지 않는다.
         }

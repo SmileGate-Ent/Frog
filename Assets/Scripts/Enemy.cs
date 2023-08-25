@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] LayerMask tongueLayer;
     [SerializeField] LayerMask frogBodyLayer;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask waterLayer;
 
     [SerializeField] float damage = 30;
     [SerializeField] int deltaScore = 20;
@@ -74,6 +75,10 @@ public class Enemy : MonoBehaviour
             }
         }
         else if ((groundLayer.value & (1 << col.gameObject.layer)) != 0)
+        {
+            // 아무것도 하지 않는다.
+        }
+        else if ((waterLayer.value & (1 << col.gameObject.layer)) != 0)
         {
             // 아무것도 하지 않는다.
         }

@@ -226,6 +226,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
   deltaHp: 3
   deltaScore: 5
   preset: {fileID: 11400000, guid: 6140e7bfc1c94cf48b49ef5493d76887, type: 2}
