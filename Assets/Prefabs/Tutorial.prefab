@@ -124,8 +124,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9158037421079831442}
   - {fileID: 6712934750776770363}
+  - {fileID: 9158037421079831442}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -187,9 +187,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e75e115a10d9dee49a036a22a84be603, type: 3}
   - {fileID: 21300000, guid: 55a50a0df2cecaa409c9e789b47a7fd8, type: 3}
   - {fileID: 21300000, guid: 1d083b19937dfdb428ef29b108fd9178, type: 3}
-  - {fileID: 21300000, guid: 5289126ba15af1c4e846a9ef9f777246, type: 3}
-  - {fileID: 21300000, guid: 571d06d8212f57148803b36af7f76205, type: 3}
-  - {fileID: 21300000, guid: 593190df5b41b6b4f907b0f95ef0efce, type: 3}
+  - {fileID: 21300000, guid: 0530979527d2ba44a97fa08ce764509f, type: 3}
   - {fileID: 21300000, guid: 8c9c5461b69890d49b364630f91aa750, type: 3}
   - {fileID: 21300000, guid: f3b72dbcd951bb14393b656aee34cebd, type: 3}
   - {fileID: 21300000, guid: a87dcf1be8d9b6a4fa4c490146a7dc61, type: 3}

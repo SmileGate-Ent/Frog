@@ -4,11 +4,17 @@ public class PauseSource : MonoBehaviour
 {
     void OnEnable()
     {
-        TimeScaleManager.Instance.IncrPause();
+        if (TimeScaleManager.Instance != null)
+        {
+            TimeScaleManager.Instance.IncrPause();
+        }
     }
 
     void OnDisable()
     {
-        TimeScaleManager.Instance.DescPause();
+        if (TimeScaleManager.Instance != null)
+        {
+            TimeScaleManager.Instance.DescPause();
+        }
     }
 }
