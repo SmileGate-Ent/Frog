@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 6168583843444052771}
   - component: {fileID: 7050639413744425666}
   - component: {fileID: 6561277203475348947}
+  - component: {fileID: 3539161002044150735}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -197,6 +198,18 @@ MonoBehaviour:
   rightButton: {fileID: 4147475638175244335}
   nowPage: 0
   image: {fileID: 1374402347181423513}
+--- !u!114 &3539161002044150735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132617787527962866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df43abc477b7f44b8a9200441ab2c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3101973376017918288
 GameObject:
   m_ObjectHideFlags: 0
