@@ -29,4 +29,4 @@ MonoBehaviour:
   spawnItemInterval: 0.8
   damageOverTime: 3
   damageOverTimeInterval: 1
-  enemySpawnInterval: 3
+  enemySpawnInterval: 5
