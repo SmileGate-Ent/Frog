@@ -2290,6 +2290,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56921ec4340704a4cb74fdbebdbc2eb8, type: 2}
   - {fileID: 11400000, guid: e2305c4e87b5b3e498f2a5393c68371c, type: 2}
   - {fileID: 11400000, guid: a92a80ca7af752f478d442bf46ef63b6, type: 2}
+  balanceTimeScale: 1
 --- !u!4 &1283691015
 Transform:
   m_ObjectHideFlags: 0
@@ -2316,7 +2317,7 @@ GameObject:
   - component: {fileID: 1308331075}
   - component: {fileID: 1308331076}
   m_Layer: 0
-  m_Name: Item Manager
+  m_Name: ItemSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
