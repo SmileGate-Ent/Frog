@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ItemManager : MonoBehaviour
+public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] Transform itemParent;
 
