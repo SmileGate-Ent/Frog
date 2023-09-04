@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: GreenBase
+  m_Name: GreenBase (Dark)
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 348067834, guid: 37729653cc51c994d844ce54d8977a10, type: 3}
   m_DefaultGameObject: {fileID: 0}
