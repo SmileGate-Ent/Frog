@@ -12,47 +12,72 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] Transform worldMin;
     [SerializeField] Transform worldMax;
     
+    const int MaxSampleCount = 100;
+    
     private void Start()
     {
-        NewTarget();
+        NewTarget(MaxSampleCount);
         StartCoroutine(SpawnCoroutine());
 
         for (var i = 0; i < 50; i++)
         {
-            NewTargetInWorld();
+            NewTargetInWorld(MaxSampleCount);
             Spawn();
         }
     }
 
-    private void NewTarget()
+    private void NewTarget(int tryCount)
     {
-        if (Random.Range(0, 2) == 1)
+        while (true)
         {
-            moveTarget = new Vector2(camPos[Random.Range(0, 2)].position.x + Random.Range(-5f, 5f),
-                Random.Range(-20f, 20f));
-        }
-        else
-        {
-            moveTarget = new Vector2(Random.Range(-25f, 25f),
-                camPos[Random.Range(2, 4)].position.y + Random.Range(-5f, 5f));
-        }
+            if (tryCount < 0)
+            {
+                Debug.LogError("Maximum sampling count exceeded.");
+                return;
+            }
 
-        if (!Physics2D.OverlapCircle(moveTarget, 2, moveLayer)) NewTarget();
+            moveTarget = Frog.Instance.NewSpawnPosition();
+
+            if (!Physics2D.OverlapCircle(moveTarget, 2, moveLayer))
+            {
+                tryCount--;
+                continue;
+            }
+
+            break;
+        }
     }
 
-    void NewTargetInWorld()
+    void NewTargetInWorld(int tryCount)
     {
-        moveTarget = new Vector2(Random.Range(worldMin.position.x, worldMax.position.x),
-            Random.Range(worldMin.position.y, worldMax.position.y));
-        
-        if (!Physics2D.OverlapCircle(moveTarget, 2, moveLayer)) NewTargetInWorld();
+        while (true)
+        {
+            if (tryCount < 0)
+            {
+                Debug.LogError("Maximum sampling count exceeded.");
+                return;
+            }
+
+            var worldMinPos = worldMin.position;
+            var worldMaxPos = worldMax.position;
+
+            moveTarget = new Vector2(Random.Range(worldMinPos.x, worldMaxPos.x), Random.Range(worldMinPos.y, worldMaxPos.y));
+
+            if (!Physics2D.OverlapCircle(moveTarget, 2, moveLayer))
+            {
+                tryCount--;
+                continue;
+            }
+
+            break;
+        }
     }
 
     private IEnumerator SpawnCoroutine()
     {
         Spawn();
         yield return new WaitForBalanceSeconds(BalancePlanner.Instance.CurrentPlan.RandomSpawnItemInterval);
-        NewTarget();
+        NewTarget(MaxSampleCount);
         StartCoroutine(SpawnCoroutine());
     }
 

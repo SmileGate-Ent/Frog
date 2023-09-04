@@ -9,7 +9,7 @@ public class FrogCam : MonoBehaviour
     public Camera Cam => cam;
 
     // 카메라 시야 밖 어딘가를 하나 뽑는다.
-    Vector2 NewSpawnPosition()
+    public Vector2 NewSpawnPosition()
     {
         Vector2 moveTarget;
         if (Random.Range(0, 2) == 1)

@@ -502,4 +502,6 @@ public class Frog : MonoBehaviour
             FireTongue(hit.point);
         }
     }
+
+    public Vector2 NewSpawnPosition() => frogCam.NewSpawnPosition();
 }

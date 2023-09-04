@@ -9,33 +9,41 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private LayerMask moveLayer;
     [SerializeField] private Transform[] camPos;
 
+    const int MaxSampleCount = 100;
+
     private void Start()
     {
-        NewTarget();
+        NewTarget(MaxSampleCount);
         StartCoroutine(SpawnCoroutine());
     }
 
-    private void NewTarget()
+    private void NewTarget(int tryCount)
     {
-        if (Random.Range(0, 2) == 1)
+        while (true)
         {
-            moveTarget = new Vector2(camPos[Random.Range(0, 2)].position.x + Random.Range(-5f, 5f),
-                Random.Range(-20f, 20f));
-        }
-        else
-        {
-            moveTarget = new Vector2(Random.Range(-25f, 25f),
-                camPos[Random.Range(2, 4)].position.y + Random.Range(-5f, 5f));
-        }
+            if (tryCount < 0)
+            {
+                Debug.LogError("Maximum sampling count exceeded.");
+                return;
+            }
 
-        if (!Physics2D.OverlapCircle(moveTarget, 2, moveLayer)) NewTarget();
+            moveTarget = Frog.Instance.NewSpawnPosition();
+
+            if (!Physics2D.OverlapCircle(moveTarget, 2, moveLayer))
+            {
+                tryCount--;
+                continue;
+            }
+
+            break;
+        }
     }
 
     private IEnumerator SpawnCoroutine()
     {
         Instantiate(monster, moveTarget, Quaternion.identity);
         yield return new WaitForBalanceSeconds(BalancePlanner.Instance.CurrentPlan.RandomSpawnEnemyInterval);
-        NewTarget();
+        NewTarget(MaxSampleCount);
         StartCoroutine(SpawnCoroutine());
     }
 }
