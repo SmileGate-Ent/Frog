@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 0
   m_Name: R
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -427,7 +427,7 @@ GameObject:
   m_Layer: 0
   m_Name: U
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -782,6 +782,7 @@ GameObject:
   - component: {fileID: 7812229505555473911}
   - component: {fileID: 8013406068149684112}
   - component: {fileID: 990031283716102760}
+  - component: {fileID: 4605774271598716808}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -847,7 +848,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 975
+    m_Bits: 991
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -911,6 +912,24 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &4605774271598716808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6657326190486319170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fc940c19f6bb0c4fb1404f53f0d8eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 7812229505555473911}
+  camSides:
+  - {fileID: 5872895706797156777}
+  - {fileID: 8609625344368092421}
+  - {fileID: 6727272725736324805}
+  - {fileID: 9174163873995140502}
 --- !u!1 &7155709360993122915
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   tongueTargetPrefab: {fileID: 8461668348430281943, guid: 1e5674e7885e9274281cd20ba6bc5ffb, type: 3}
-  cam: {fileID: 7812229505555473911}
+  frogCam: {fileID: 4605774271598716808}
   uiCam: {fileID: 0}
   tongueScale: 0.33333334
   tongue: {fileID: 1848718854129895392}
@@ -1045,7 +1064,8 @@ MonoBehaviour:
   gameOverPopup: {fileID: 0}
   fireTouchLayers:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 528
+  closeButton: {fileID: 0}
 --- !u!50 &4364672906974703244
 Rigidbody2D:
   serializedVersion: 4
@@ -1277,7 +1297,7 @@ GameObject:
   m_Layer: 0
   m_Name: L
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1340,7 +1360,7 @@ GameObject:
   m_Layer: 0
   m_Name: D
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

@@ -9,9 +9,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
-#if UNITY_ANDROID
-using GooglePlayGames;
-#endif
 
 public class Frog : MonoBehaviour
 {
@@ -29,7 +26,7 @@ public class Frog : MonoBehaviour
 
     [SerializeField] GameObject tongueTargetPrefab; // 생성할 게임 오브젝트 프리팹입니다.
 
-    [SerializeField] Camera cam;
+    [SerializeField] FrogCam frogCam;
     [SerializeField] Camera uiCam;
 
     [SerializeField] float tongueScale = 1.0f / 3;
@@ -232,7 +229,7 @@ public class Frog : MonoBehaviour
         var mousePos = Input.mousePosition;
 
         // 스크린 좌표에서 이러한 월드 좌표를 얻습니다.
-        var mouseWorldPoint = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
+        var mouseWorldPoint = frogCam.Cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, frogCam.Cam.nearClipPlane));
         mouseWorldPoint.z = 0; // 생성하려는 게임 오브젝트의 z축 위치를 조정합니다.
 
         // 개구리 이미지 좌우 뒤집기
@@ -371,7 +368,7 @@ public class Frog : MonoBehaviour
     private void AdjustDebuffUiPosition()
     {
         var debuffSliderScreenPoint =
-            RectTransformUtility.WorldToScreenPoint(cam, transform.position + new Vector3(0, -1.5f, 0));
+            RectTransformUtility.WorldToScreenPoint(frogCam.Cam, transform.position + new Vector3(0, -1.5f, 0));
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             debuffSlider.transform.parent.GetComponent<RectTransform>(),
             debuffSliderScreenPoint, uiCam, out var debuffLocalPos);
@@ -497,7 +494,7 @@ public class Frog : MonoBehaviour
 
     public void OnFireAreaTouch(PointerEventData eventData)
     {
-        var ray = RectTransformUtility.ScreenPointToRay(cam, eventData.position);
+        var ray = RectTransformUtility.ScreenPointToRay(frogCam.Cam, eventData.position);
         var hit = Physics2D.Raycast(ray.origin, ray.direction, 1000.0f, fireTouchLayers);
         //Debug.Log(hit);
         if (hit.collider != null)
