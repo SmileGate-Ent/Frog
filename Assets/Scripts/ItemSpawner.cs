@@ -51,7 +51,7 @@ public class ItemSpawner : MonoBehaviour
     private IEnumerator SpawnCoroutine()
     {
         Spawn();
-        yield return new WaitForSeconds(BalancePlanner.Instance.CurrentPlan.RandomSpawnItemInterval);
+        yield return new WaitForBalanceSeconds(BalancePlanner.Instance.CurrentPlan.RandomSpawnItemInterval);
         NewTarget();
         StartCoroutine(SpawnCoroutine());
     }
