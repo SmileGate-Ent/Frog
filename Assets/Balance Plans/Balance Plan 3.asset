@@ -26,7 +26,7 @@ MonoBehaviour:
   - {fileID: 660185581643088783, guid: 8eb908a2cda83ee42a2c86cad38b3720, type: 3}
   - {fileID: 660185581643088783, guid: ce2adc5839725ae4dacf2f12abb9406d, type: 3}
   - {fileID: 660185581643088783, guid: 9ca84d0d9d292d049a782eb20c6c87ac, type: 3}
-  spawnItemInterval: 0.8
+  spawnItemInterval: 1
   damageOverTime: 3
   damageOverTimeInterval: 1
-  enemySpawnInterval: 5
+  enemySpawnInterval: 8
