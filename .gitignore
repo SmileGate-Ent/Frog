@@ -160,3 +160,4 @@ sysinfo.txt
 /Screenshot*.png
 
 .DS_Store
+/user.keystore
