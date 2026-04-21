@@ -1,7 +1,0 @@
-[
-{
-  "directory": "R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/x86",
-  "command": "C:\\PROGRA~1\\Unity\\Hub\\Editor\\60003~1.9F1\\Editor\\Data\\PLAYBA~1\\ANDROI~1\\NDK\\TOOLCH~1\\llvm\\prebuilt\\WINDOW~1\\bin\\CLANG_~1.EXE --target=i686-none-linux-android24 --sysroot=\"C:/Program Files/Unity/Hub/Editor/6000.3.9f1/Editor/Data/PlaybackEngines/AndroidPlayer/NDK/toolchains/llvm/prebuilt/windows-x86_64/sysroot\" -DEXTERNAL_FRAME_PACING_CODE -Dswappywrapper_EXPORTS -IR:/repos/Frog-android/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/FramePacing -isystem C:/Users/gb/.gradle/caches/8.13/transforms/6553fed145da0193876e5b502bd35441/transformed/jetified-games-frame-pacing-2.1.2/prefab/modules/swappy_static/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D__BIONIC_NO_PAGE_SIZE_MACRO -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -Wall -Wextra -pedantic -Werror -O2 -g -DNDEBUG -fPIC -o FramePacing\\CMakeFiles\\swappywrapper.dir\\UnitySwappyWrapper.cpp.o -c R:\\repos\\Frog-android\\Library\\Bee\\Android\\Prj\\IL2CPP\\Gradle\\unityLibrary\\src\\main\\cpp\\FramePacing\\UnitySwappyWrapper.cpp",
-  "file": "R:\\repos\\Frog-android\\Library\\Bee\\Android\\Prj\\IL2CPP\\Gradle\\unityLibrary\\src\\main\\cpp\\FramePacing\\UnitySwappyWrapper.cpp"
-}
-]

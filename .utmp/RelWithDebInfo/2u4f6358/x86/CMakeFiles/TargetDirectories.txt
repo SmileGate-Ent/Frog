@@ -1,5 +1,0 @@
-R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/x86/CMakeFiles/edit_cache.dir
-R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/x86/CMakeFiles/rebuild_cache.dir
-R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/x86/FramePacing/CMakeFiles/swappywrapper.dir
-R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/x86/FramePacing/CMakeFiles/edit_cache.dir
-R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/x86/FramePacing/CMakeFiles/rebuild_cache.dir
