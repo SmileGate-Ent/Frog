@@ -1,0 +1,5 @@
+R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/arm64-v8a/CMakeFiles/edit_cache.dir
+R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/arm64-v8a/CMakeFiles/rebuild_cache.dir
+R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+R:/repos/Frog-android/.utmp/RelWithDebInfo/2u4f6358/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir
