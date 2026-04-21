@@ -83,7 +83,8 @@ static class FrogBuild {
             if (skipArmV7 == false) {
                 PlayerSettings.Android.targetArchitectures |= AndroidArchitecture.ARMv7;
             }
-            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.X86_64;
+            // 그냥 무조건 넣자.
+            PlayerSettings.Android.targetArchitectures |= AndroidArchitecture.X86_64;
         } else {
             // 개발 기기에서 바로 보고 싶을 땐 mono로 보자
             PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android, ScriptingImplementation.Mono2x);
